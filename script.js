@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    script.js — Muhammad Hamdan Portfolio
    Pure Vanilla JS — no libraries
    ============================================================ */
@@ -491,6 +491,297 @@
     document.addEventListener('mouseup', function() { dot.classList.remove('cursor-click'); ring.classList.remove('cursor-click'); });
     document.addEventListener('mouseleave', function() { dot.style.opacity='0'; ring.style.opacity='0'; });
     document.addEventListener('mouseenter', function() { dot.style.opacity='1'; ring.style.opacity='0.7'; });
+  })();
+
+  // ══════════════════════════════════════════════════════════
+  // FEATURE 6 — GitHub Activity Heatmap + Live Stats
+  // Fetches real data from GitHub REST API + contributions API
+  // Falls back to seeded data silently if APIs are unavailable
+  // ══════════════════════════════════════════════════════════
+  (function initGitHubActivity() {
+    var USERNAME       = 'Hamdan-a11y';
+    var MONTHS         = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var TOTAL_WEEKS    = 53;
+    var DAYS_PER_WEEK  = 7;
+    var FALLBACK_STATS = { followers: 14, commits: 892, repos: 33, stars: 47 };
+
+    // ── Seeded fallback for heatmap when contributions API is down ──
+    function seededRand(seed) {
+      var x = Math.sin(seed + 1) * 10000;
+      return x - Math.floor(x);
+    }
+
+    function generateFallbackData() {
+      var data = [];
+      var today = new Date();
+      var startDate = new Date(today);
+      startDate.setDate(today.getDate() - (TOTAL_WEEKS * 7 - 1));
+      var streak = 0;
+      for (var w = 0; w < TOTAL_WEEKS; w++) {
+        var week = [];
+        for (var d = 0; d < DAYS_PER_WEEK; d++) {
+          var s = w * 7 + d;
+          var r = seededRand(s);
+          var isWeekend = (d === 5 || d === 6);
+          streak = Math.max(0, streak - 0.05);
+          var lv = 0;
+          if (r < 0.18 + streak)       { lv = 0; }
+          else if (r < 0.40)            { lv = 1; }
+          else if (r < 0.62)            { lv = 2; streak += 0.08; }
+          else if (r < 0.82)            { lv = 3; streak += 0.12; }
+          else                          { lv = 4; streak += 0.18; }
+          if (isWeekend && lv > 1) lv = Math.max(0, lv - 1);
+          var ct = [0,
+            Math.floor(1 + seededRand(s+100)*3),
+            Math.floor(4 + seededRand(s+200)*5),
+            Math.floor(8 + seededRand(s+300)*7),
+            Math.floor(15 + seededRand(s+400)*10)][lv];
+          var dt = new Date(startDate);
+          dt.setDate(startDate.getDate() + w * 7 + d);
+          week.push({ level: lv, count: ct, date: dt });
+        }
+        data.push(week);
+      }
+      return data;
+    }
+
+    // ── Live API fetches — all errors silently return null ──
+    function ghFetch(url) {
+      return fetch(url, { headers: { 'Accept': 'application/vnd.github.v3+json' } })
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .catch(function() { return null; });
+    }
+
+    function fetchUserStats()  { return ghFetch('https://api.github.com/users/' + USERNAME); }
+    function fetchAllRepos()   { return ghFetch('https://api.github.com/users/' + USERNAME + '/repos?per_page=100&sort=updated'); }
+    function fetchContributions() {
+      return fetch('https://github-contributions-api.jogruber.de/v4/' + USERNAME + '?y=last')
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .catch(function() { return null; });
+    }
+
+    // ── Map contributions API response → week×day grid ──
+    function processContributions(contribs) {
+      if (!contribs || !contribs.contributions) return generateFallbackData();
+      var lookup = {};
+      contribs.contributions.forEach(function(c) {
+        lookup[c.date] = { level: c.level, count: c.count };
+      });
+      var data = [];
+      var today = new Date();
+      var startDate = new Date(today);
+      startDate.setDate(today.getDate() - (TOTAL_WEEKS * 7 - 1));
+      for (var w = 0; w < TOTAL_WEEKS; w++) {
+        var week = [];
+        for (var d = 0; d < DAYS_PER_WEEK; d++) {
+          var dt = new Date(startDate);
+          dt.setDate(startDate.getDate() + w * 7 + d);
+          var isFuture = dt > today;
+          var key   = dt.toISOString().split('T')[0]; // YYYY-MM-DD
+          var entry = (!isFuture && lookup[key]) ? lookup[key] : { level: 0, count: 0 };
+          week.push({ level: entry.level, count: entry.count, date: dt });
+        }
+        data.push(week);
+      }
+      return data;
+    }
+
+    // ── Ease-out cubic count-up ──
+    function countUp(el, target, duration) {
+      var startTime = null;
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        var p    = Math.min((ts - startTime) / duration, 1);
+        var ease = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(ease * target).toLocaleString();
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = target.toLocaleString();
+      }
+      requestAnimationFrame(step);
+    }
+
+    // ── Month label strip ──
+    function buildMonthLabels(containerEl) {
+      var today = new Date();
+      var startDate = new Date(today);
+      startDate.setDate(today.getDate() - (TOTAL_WEEKS * 7 - 1));
+      var lastMonth = -1;
+      containerEl.innerHTML = '';
+      for (var w = 0; w < TOTAL_WEEKS; w++) {
+        var wd = new Date(startDate);
+        wd.setDate(startDate.getDate() + w * 7);
+        var m  = wd.getMonth();
+        var sp = document.createElement('span');
+        sp.className  = 'gh-month-label';
+        sp.style.cssText = 'width:15px;display:inline-block;flex-shrink:0';
+        if (m !== lastMonth) { sp.textContent = MONTHS[m]; lastMonth = m; }
+        containerEl.appendChild(sp);
+      }
+    }
+
+    // ── Build heatmap DOM ──
+    function buildGrid(gridEl, data, tooltip) {
+      gridEl.innerHTML = '';
+      data.forEach(function(week) {
+        var col = document.createElement('div');
+        col.className = 'gh-week-col';
+        week.forEach(function(cd) {
+          var cell    = document.createElement('div');
+          cell.className = 'gh-cell';
+          cell.setAttribute('data-level', String(cd.level));
+          var dateStr = cd.date.toLocaleDateString('en-US', {
+            weekday: 'short', month: 'short', day: 'numeric', year: 'numeric'
+          });
+          cell.setAttribute('data-date',    dateStr);
+          cell.setAttribute('data-commits', cd.count);
+
+          cell.addEventListener('mouseenter', function() {
+            var c     = parseInt(this.getAttribute('data-commits'), 10);
+            var label = c === 0 ? 'No contributions'
+                      : c === 1 ? '1 contribution'
+                      : c + ' contributions';
+            tooltip.textContent = label + ' · ' + this.getAttribute('data-date');
+            tooltip.classList.add('visible');
+          }.bind(cell));
+          cell.addEventListener('mousemove', function(e) {
+            var rect = tooltip.parentElement.getBoundingClientRect();
+            tooltip.style.left = (e.clientX - rect.left + 14) + 'px';
+            tooltip.style.top  = (e.clientY - rect.top  - 36) + 'px';
+          });
+          cell.addEventListener('mouseleave', function() {
+            tooltip.classList.remove('visible');
+          });
+          col.appendChild(cell);
+        });
+        gridEl.appendChild(col);
+      });
+    }
+
+    // ── Staggered entrance animation ──
+    function animateCells(gridEl) {
+      gridEl.querySelectorAll('.gh-week-col').forEach(function(col, ci) {
+        col.querySelectorAll('.gh-cell').forEach(function(cell, di) {
+          setTimeout(function() {
+            cell.style.transition = 'opacity 0.3s ease, transform 0.3s cubic-bezier(0.34,1.56,0.64,1)';
+            cell.style.opacity    = '1';
+            cell.style.transform  = 'scale(1)';
+          }, ci * 8 + di * 12);
+        });
+      });
+    }
+
+    // ── Show cells instantly (used after API rebuild) ──
+    function showCellsInstant(gridEl) {
+      gridEl.querySelectorAll('.gh-cell').forEach(function(cell) {
+        cell.style.transition = 'none';
+        cell.style.opacity    = '1';
+        cell.style.transform  = 'scale(1)';
+      });
+    }
+
+    // ── Update stat counter cards ──
+    function updateStatCards(stats) {
+      var mapping = {
+        'gh-count-followers': stats.followers,
+        'gh-count-commits':   stats.commits,
+        'gh-count-repos':     stats.repos,
+        'gh-count-stars':     stats.stars
+      };
+      Object.keys(mapping).forEach(function(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        el.setAttribute('data-count', mapping[id]);
+        countUp(el, mapping[id], 1400);
+      });
+    }
+
+    // ── Loading dash while API fetches ──
+    function setStatLoading(on) {
+      ['gh-count-followers','gh-count-commits','gh-count-repos','gh-count-stars'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el && on) el.textContent = '—';
+      });
+    }
+
+    // ══ INIT ══
+    var gridEl    = document.getElementById('gh-grid');
+    var monthEl   = document.getElementById('gh-month-labels');
+    var tooltipEl = document.getElementById('gh-tooltip');
+    if (!gridEl || !monthEl || !tooltipEl) return;
+
+    // Build structure immediately with fallback data so layout is ready
+    buildMonthLabels(monthEl);
+    buildGrid(gridEl, generateFallbackData(), tooltipEl);
+
+    // Pre-hide cells for entrance animation
+    gridEl.querySelectorAll('.gh-cell').forEach(function(cell) {
+      cell.style.opacity   = '0';
+      cell.style.transform = 'scale(0.5)';
+    });
+
+    var sectionEl   = document.getElementById('github');
+    var hasAnimated = false;
+
+    var ghObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting || hasAnimated) return;
+        hasAnimated = true;
+
+        // Show loading dashes + animate fallback cells immediately
+        setStatLoading(true);
+        animateCells(gridEl);
+
+        // Fetch user, repos, and contributions in parallel
+        Promise.all([fetchUserStats(), fetchAllRepos(), fetchContributions()])
+          .then(function(results) {
+            var user     = results[0];
+            var repos    = results[1];
+            var contribs = results[2];
+
+            // Build stats object
+            var stats = {
+              followers: (user && typeof user.followers    === 'number') ? user.followers    : FALLBACK_STATS.followers,
+              repos:     (user && typeof user.public_repos === 'number') ? user.public_repos : FALLBACK_STATS.repos,
+              stars:     (repos && Array.isArray(repos))
+                           ? repos.reduce(function(s, r) { return s + (r.stargazers_count || 0); }, 0)
+                           : FALLBACK_STATS.stars,
+              commits:   FALLBACK_STATS.commits
+            };
+
+            // Sum all-time commits from contributions total object
+            if (contribs && contribs.total && typeof contribs.total === 'object') {
+              var total = Object.keys(contribs.total).reduce(function(s, k) {
+                return s + (typeof contribs.total[k] === 'number' ? contribs.total[k] : 0);
+              }, 0);
+              if (total > 0) stats.commits = total;
+            }
+
+            // Animate stats to real values
+            updateStatCards(stats);
+
+            // Rebuild heatmap with real contribution data
+            buildGrid(gridEl, processContributions(contribs), tooltipEl);
+            showCellsInstant(gridEl);
+          })
+          .catch(function() {
+            // Complete failure — still show fallback numbers
+            updateStatCards(FALLBACK_STATS);
+          });
+
+        ghObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.1 });
+
+    if (sectionEl) ghObserver.observe(sectionEl);
+
+    // Theme toggle repaint helper
+    var themeBtn = document.getElementById('theme-toggle');
+    if (themeBtn) {
+      themeBtn.addEventListener('click', function() {
+        gridEl.style.opacity = '0.99';
+        setTimeout(function() { gridEl.style.opacity = '1'; }, 50);
+      });
+    }
   })();
 
 })();
