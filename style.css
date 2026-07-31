@@ -2,22 +2,36 @@
    CSS Custom Properties
    ============================================================ */
 :root {
-  /* Colors — Refined Professional Palette */
-  --bg-primary: #09090B;
-  --bg-card: #141417;
-  --bg-card-hover: #1C1C21;
-  --accent: #6C8EEF;
-  --accent-light: #8BA8FF;
-  --accent-glow: rgba(108, 142, 239, 0.2);
-  --accent-glow-strong: rgba(108, 142, 239, 0.38);
-  --text-primary: #E2E4EA;
-  --text-muted: #858896;
-  --text-dim: #555766;
-  --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-hover: rgba(108, 142, 239, 0.4);
-  --gradient-hero: radial-gradient(ellipse 80% 60% at 50% -20%, rgba(108, 142, 239, 0.1) 0%, transparent 70%);
-  --gradient-hero-2: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(108, 142, 239, 0.06) 0%, transparent 60%);
-  --gradient-hero-3: radial-gradient(ellipse 50% 40% at 10% 60%, rgba(139, 168, 255, 0.04) 0%, transparent 50%);
+  /* Colors — Unique White & Slate Platinum Monochrome Palette */
+  --bg-primary: #F8F9FA;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F1F3F5;
+  --accent: #0F172A;
+  --accent-light: #334155;
+  --accent-glow: rgba(15, 23, 42, 0.06);
+  --accent-glow-strong: rgba(15, 23, 42, 0.12);
+  --text-primary: #0F172A;
+  --text-muted: #475569;
+  --text-dim: #64748B;
+  --border-subtle: rgba(15, 23, 42, 0.08);
+  --border-hover: rgba(15, 23, 42, 0.22);
+  --gradient-hero: radial-gradient(ellipse 80% 60% at 50% -20%, rgba(15, 23, 42, 0.04) 0%, transparent 70%);
+  --gradient-hero-2: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(51, 65, 85, 0.03) 0%, transparent 60%);
+  --gradient-hero-3: radial-gradient(ellipse 50% 40% at 10% 60%, rgba(100, 116, 139, 0.03) 0%, transparent 50%);
+  --navbar-scrolled-bg: rgba(248, 249, 250, 0.85);
+  --mobile-nav-bg: rgba(248, 249, 250, 0.97);
+  --btn-secondary-bg: #FFFFFF;
+  --social-btn-bg: #FFFFFF;
+  --skill-badge-bg: #F1F5F9;
+  --featured-card-bg: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+  --project-tech-bg: rgba(15, 23, 42, 0.05);
+  --project-tech-border: rgba(15, 23, 42, 0.08);
+  --project-link-bg: rgba(15, 23, 42, 0.04);
+  --project-link-border: rgba(15, 23, 42, 0.12);
+  --project-link-hover-bg: rgba(15, 23, 42, 0.08);
+  --coursework-tag-bg: rgba(15, 23, 42, 0.04);
+  --coursework-tag-border: rgba(15, 23, 42, 0.12);
+  --coursework-tag-hover-bg: rgba(15, 23, 42, 0.08);
 
   /* Fonts */
   --font-heading: 'Space Grotesk', sans-serif;
@@ -35,6 +49,85 @@
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-spring: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Spotlight Hover Effect */
+  --spotlight-color: rgba(0, 0, 0, 0.04);
+}
+
+/* ============================================================
+   Dark Mode Variables
+   ============================================================ */
+[data-theme="dark"] {
+  --bg-primary: #0B0F1A;
+  --bg-card: #131929;
+  --bg-card-hover: #1A2035;
+  --accent: #E2E8F0;
+  --accent-light: #94A3B8;
+  --accent-glow: rgba(226, 232, 240, 0.08);
+  --accent-glow-strong: rgba(226, 232, 240, 0.16);
+  --text-primary: #F1F5F9;
+  --text-muted: #94A3B8;
+  --text-dim: #64748B;
+  --border-subtle: rgba(226, 232, 240, 0.07);
+  --border-hover: rgba(226, 232, 240, 0.18);
+  --gradient-hero: radial-gradient(ellipse 80% 60% at 50% -20%, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+  --gradient-hero-2: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(139, 92, 246, 0.05) 0%, transparent 60%);
+  --gradient-hero-3: radial-gradient(ellipse 50% 40% at 10% 60%, rgba(59, 130, 246, 0.04) 0%, transparent 50%);
+  --navbar-scrolled-bg: rgba(11, 15, 26, 0.88);
+  --mobile-nav-bg: rgba(11, 15, 26, 0.98);
+  --btn-secondary-bg: #1A2035;
+  --social-btn-bg: #1A2035;
+  --skill-badge-bg: rgba(226, 232, 240, 0.06);
+  --featured-card-bg: linear-gradient(135deg, #131929 0%, #0F1622 100%);
+  --project-tech-bg: rgba(226, 232, 240, 0.06);
+  --project-tech-border: rgba(226, 232, 240, 0.1);
+  --project-link-bg: rgba(226, 232, 240, 0.05);
+  --project-link-border: rgba(226, 232, 240, 0.1);
+  --project-link-hover-bg: rgba(226, 232, 240, 0.1);
+  --coursework-tag-bg: rgba(226, 232, 240, 0.05);
+  --coursework-tag-border: rgba(226, 232, 240, 0.1);
+  --coursework-tag-hover-bg: rgba(226, 232, 240, 0.1);
+  --spotlight-color: rgba(255, 255, 255, 0.04);
+}
+
+/* Light theme spotlight color override */
+body.light-theme,
+[data-theme="light"] {
+  --spotlight-color: rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]):not(.dark-theme) {
+    --spotlight-color: rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* ============================================================
+   Card Base & Spotlight Styles
+   ============================================================ */
+.card {
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    300px circle at var(--x, 50%) var(--y, 50%),
+    var(--spotlight-color),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.card:hover::before {
+  opacity: 1;
 }
 
 /* ============================================================
@@ -162,11 +255,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar.scrolled {
   padding: 12px 0;
-  background: rgba(9, 9, 11, 0.85);
+  background: var(--navbar-scrolled-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border-subtle);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 }
 
 .navbar .container {
@@ -205,7 +298,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-links a:hover {
   color: var(--text-primary);
-  background: rgba(108, 142, 239, 0.08);
+  background: rgba(15, 23, 42, 0.05);
 }
 
 .nav-links a::after {
@@ -299,7 +392,7 @@ h1, h2, h3, h4, h5, h6 {
 .hero-bg-orb--1 {
   width: 500px;
   height: 500px;
-  background: rgba(108, 142, 239, 0.08);
+  background: rgba(15, 23, 42, 0.05);
   top: -10%;
   right: -5%;
   animation-delay: -2s;
@@ -308,7 +401,7 @@ h1, h2, h3, h4, h5, h6 {
 .hero-bg-orb--2 {
   width: 350px;
   height: 350px;
-  background: rgba(139, 168, 255, 0.06);
+  background: rgba(51, 65, 85, 0.02);
   bottom: 10%;
   left: -5%;
   animation-delay: -5s;
@@ -340,8 +433,8 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--accent-light);
   padding: 8px 18px;
   border-radius: var(--badge-radius);
-  border: 1px solid rgba(108, 142, 239, 0.2);
-  background: rgba(108, 142, 239, 0.06);
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: rgba(15, 23, 42, 0.04);
   margin-bottom: 28px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -369,7 +462,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero h1 .gradient-text {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 50%, #a5b8ff 100%);
+  background: linear-gradient(135deg, #0F172A 0%, #334155 50%, #64748B 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -425,7 +518,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  background: linear-gradient(135deg, #0F172A, #334155);
   color: #fff;
   box-shadow: 0 4px 20px var(--accent-glow);
 }
@@ -436,14 +529,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-secondary {
-  background: transparent;
+  background: var(--btn-secondary-bg);
   color: var(--text-primary);
-  border: 1px solid rgba(226, 228, 234, 0.15);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
 .btn-secondary:hover {
   border-color: var(--accent);
-  background: rgba(108, 142, 239, 0.06);
+  background: var(--bg-card-hover);
   transform: translateY(-2px);
 }
 
@@ -460,8 +554,9 @@ h1, h2, h3, h4, h5, h6 {
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  border: 1px solid rgba(226, 228, 234, 0.1);
-  background: rgba(20, 20, 23, 0.5);
+  border: 1px solid var(--border-subtle);
+  background: var(--social-btn-bg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
   color: var(--text-muted);
   font-size: 1.1rem;
   transition: all var(--transition-fast);
@@ -470,7 +565,7 @@ h1, h2, h3, h4, h5, h6 {
 .hero-socials a:hover {
   color: var(--accent-light);
   border-color: var(--accent);
-  background: rgba(108, 142, 239, 0.08);
+  background: rgba(15, 23, 42, 0.05);
   transform: translateY(-2px);
   box-shadow: 0 4px 15px var(--accent-glow);
 }
@@ -515,7 +610,7 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
 }
 
-.about-card::before {
+.about-card::after {
   content: '';
   position: absolute;
   top: 0;
@@ -525,15 +620,16 @@ h1, h2, h3, h4, h5, h6 {
   background: linear-gradient(90deg, transparent, var(--accent), transparent);
   opacity: 0;
   transition: opacity var(--transition-smooth);
+  z-index: 2;
 }
 
 .about-card:hover {
   border-color: var(--border-hover);
   transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(108, 142, 239, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
 }
 
-.about-card:hover::before {
+.about-card:hover::after {
   opacity: 1;
 }
 
@@ -578,13 +674,13 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--accent-light);
   padding: 6px 16px;
   border-radius: var(--badge-radius);
-  border: 1px solid rgba(108, 142, 239, 0.2);
-  background: rgba(108, 142, 239, 0.06);
+  border: 1px solid var(--coursework-tag-border);
+  background: var(--coursework-tag-bg);
   transition: all var(--transition-fast);
 }
 
 .coursework-tag:hover {
-  background: rgba(108, 142, 239, 0.15);
+  background: var(--coursework-tag-hover-bg);
   border-color: var(--accent);
   transform: translateY(-2px);
 }
@@ -613,7 +709,7 @@ h1, h2, h3, h4, h5, h6 {
 .skill-category:hover {
   border-color: var(--border-hover);
   transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(108, 142, 239, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
 }
 
 .skill-category-header {
@@ -630,7 +726,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  background: rgba(108, 142, 239, 0.1);
+  background: rgba(15, 23, 42, 0.05);
   font-size: 1.25rem;
 }
 
@@ -652,22 +748,22 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-muted);
   padding: 7px 16px;
   border-radius: var(--badge-radius);
-  background: rgba(226, 228, 234, 0.04);
-  border: 1px solid rgba(226, 228, 234, 0.08);
+  background: var(--skill-badge-bg);
+  border: 1px solid var(--border-subtle);
   transition: all var(--transition-fast);
 }
 
 .skill-badge:hover {
   color: var(--accent-light);
-  border-color: rgba(108, 142, 239, 0.3);
-  background: rgba(108, 142, 239, 0.08);
+  border-color: rgba(15, 23, 42, 0.2);
+  background: rgba(15, 23, 42, 0.05);
   transform: translateY(-2px);
 }
 
 .skill-badge.primary {
   color: var(--accent-light);
-  border-color: rgba(108, 142, 239, 0.3);
-  background: rgba(108, 142, 239, 0.1);
+  border-color: rgba(15, 23, 42, 0.2);
+  background: rgba(15, 23, 42, 0.05);
 }
 
 /* ============================================================
@@ -695,7 +791,7 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
 }
 
-.project-card::before {
+.project-card::after {
   content: '';
   position: absolute;
   top: 0;
@@ -705,26 +801,27 @@ h1, h2, h3, h4, h5, h6 {
   background: linear-gradient(90deg, transparent, var(--accent), transparent);
   opacity: 0;
   transition: opacity var(--transition-smooth);
+  z-index: 2;
 }
 
 .project-card:hover {
   border-color: var(--border-hover);
   transform: translateY(-6px);
-  box-shadow: 0 12px 40px rgba(108, 142, 239, 0.12);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.07);
 }
 
-.project-card:hover::before {
+.project-card:hover::after {
   opacity: 1;
 }
 
 /* Featured full-width card */
 .project-card.featured {
   grid-column: 1 / -1;
-  border-color: rgba(108, 142, 239, 0.25);
-  background: linear-gradient(135deg, var(--bg-card) 0%, rgba(108, 142, 239, 0.04) 100%);
+  border-color: var(--border-hover);
+  background: var(--featured-card-bg);
 }
 
-.project-card.featured::before {
+.project-card.featured::after {
   opacity: 0.6;
 }
 
@@ -741,8 +838,8 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--accent-light);
   padding: 5px 14px;
   border-radius: var(--badge-radius);
-  background: rgba(108, 142, 239, 0.15);
-  border: 1px solid rgba(108, 142, 239, 0.3);
+  background: rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.15);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: 12px;
@@ -785,8 +882,8 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--accent-light);
   padding: 4px 12px;
   border-radius: var(--badge-radius);
-  background: rgba(108, 142, 239, 0.08);
-  border: 1px solid rgba(108, 142, 239, 0.15);
+  background: var(--project-tech-bg);
+  border: 1px solid var(--project-tech-border);
 }
 
 .project-link {
@@ -798,14 +895,14 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--accent-light);
   padding: 10px 20px;
   border-radius: 10px;
-  border: 1px solid rgba(108, 142, 239, 0.2);
-  background: rgba(108, 142, 239, 0.06);
+  border: 1px solid var(--project-link-border);
+  background: var(--project-link-bg);
   transition: all var(--transition-fast);
   width: fit-content;
 }
 
 .project-link:hover {
-  background: rgba(108, 142, 239, 0.15);
+  background: var(--project-link-hover-bg);
   border-color: var(--accent);
   transform: translateY(-2px);
   box-shadow: 0 4px 15px var(--accent-glow);
@@ -832,7 +929,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 12px;
   width: 2px;
   height: 100%;
-  background: linear-gradient(180deg, var(--accent), rgba(108, 142, 239, 0.15));
+  background: linear-gradient(180deg, var(--accent), rgba(15, 23, 42, 0.12));
   border-radius: 1px;
 }
 
@@ -877,7 +974,7 @@ h1, h2, h3, h4, h5, h6 {
 .timeline-content:hover {
   border-color: var(--border-hover);
   transform: translateX(6px);
-  box-shadow: 0 8px 25px rgba(108, 142, 239, 0.08);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
 }
 
 .timeline-content h3 {
@@ -935,7 +1032,7 @@ h1, h2, h3, h4, h5, h6 {
 .contact-card:hover {
   border-color: var(--border-hover);
   transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(108, 142, 239, 0.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
 }
 
 .contact-card-icon {
@@ -1057,7 +1154,7 @@ h1, h2, h3, h4, h5, h6 {
     right: -100%;
     width: 280px;
     height: 100vh;
-    background: rgba(9, 9, 11, 0.97);
+    background: var(--mobile-nav-bg);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     flex-direction: column;
@@ -1124,4 +1221,303 @@ h1, h2, h3, h4, h5, h6 {
   .hero-typewriter-wrapper {
     font-size: 1rem;
   }
+}
+
+/* ============================================================
+   Theme Toggle Button
+   ============================================================ */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+  background: var(--btn-secondary-bg);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+  background: var(--bg-card-hover);
+  transform: rotate(15deg) scale(1.05);
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  flex-shrink: 0;
+}
+
+/* Show sun in dark, moon in light */
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: block; }
+
+[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+
+/* Smooth color transitions across the whole page */
+body {
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+.card, .navbar, .footer, .about-card, .skill-category,
+.project-card, .timeline-content, .contact-card {
+  transition: background-color 0.35s ease, border-color 0.35s ease,
+              color 0.35s ease, transform var(--transition-smooth),
+              box-shadow var(--transition-smooth);
+}
+
+/* Dark mode orb colors */
+[data-theme="dark"] .hero-bg-orb--1 {
+  background: rgba(99, 102, 241, 0.08);
+}
+
+[data-theme="dark"] .hero-bg-orb--2 {
+  background: rgba(139, 92, 246, 0.05);
+}
+
+/* Dark mode hero gradient text */
+[data-theme="dark"] .hero h1 .gradient-text {
+  background: linear-gradient(135deg, #E2E8F0 0%, #94A3B8 50%, #64748B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Dark mode btn-primary */
+[data-theme="dark"] .btn-primary {
+  background: linear-gradient(135deg, #E2E8F0, #94A3B8);
+  color: #0B0F1A;
+}
+
+/* Dark mode nav active link */
+[data-theme="dark"] .nav-links a:hover {
+  background: rgba(226, 232, 240, 0.05);
+}
+
+/* ============================================================
+   FEATURE 1 — Particle Canvas Background
+   ============================================================ */
+#particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* ============================================================
+   FEATURE 2 — Neural Network Canvas (Hero)
+   ============================================================ */
+#neural-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+}
+
+/* ============================================================
+   FEATURE 3 — 3D Tilt Cards with Holographic Glare
+   ============================================================ */
+.card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Glare layer inside each card */
+.card-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 3;
+  background: radial-gradient(
+    circle at var(--gx, 50%) var(--gy, 50%),
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.06) 30%,
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  mix-blend-mode: overlay;
+}
+
+.card:hover .card-glare {
+  opacity: 1;
+}
+
+[data-theme="dark"] .card-glare {
+  background: radial-gradient(
+    circle at var(--gx, 50%) var(--gy, 50%),
+    rgba(180, 200, 255, 0.22) 0%,
+    rgba(130, 160, 255, 0.08) 30%,
+    transparent 65%
+  );
+}
+
+/* ============================================================
+   FEATURE 4 — Skill Circular Progress Arc
+   ============================================================ */
+.skill-progress-ring {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.skill-progress-ring svg {
+  width: 52px;
+  height: 52px;
+  transform: rotate(-90deg);
+  overflow: visible;
+}
+
+.skill-progress-ring .ring-bg {
+  fill: none;
+  stroke: var(--border-subtle);
+  stroke-width: 3.5;
+}
+
+.skill-progress-ring .ring-fill {
+  fill: none;
+  stroke: url(#skillGrad);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-dasharray: 126;
+  stroke-dashoffset: 126;
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skill-progress-ring .ring-label {
+  position: absolute;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--accent-light);
+  text-align: center;
+  width: 52px;
+  line-height: 1;
+}
+
+.skill-ring-wrapper {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.skill-ring-label {
+  position: absolute;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--accent-light);
+  pointer-events: none;
+  letter-spacing: -0.02em;
+}
+
+.skill-category-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* ============================================================
+   FEATURE 5 — Custom Animated Cursor
+   ============================================================ */
+@media (pointer: fine) {
+  /* Only apply on non-touch devices */
+  body {
+    cursor: none;
+  }
+
+  a, button, [role="button"], .card, .nav-links a, .btn, .skill-badge,
+  .coursework-tag, .project-link, .theme-toggle, .nav-toggle {
+    cursor: none;
+  }
+}
+
+#cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease, background 0.2s ease, opacity 0.3s ease;
+  mix-blend-mode: difference;
+}
+
+#cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              border-color 0.2s ease,
+              opacity 0.3s ease;
+  opacity: 0.7;
+}
+
+#cursor-dot.cursor-hover {
+  width: 12px;
+  height: 12px;
+}
+
+#cursor-ring.cursor-hover {
+  width: 56px;
+  height: 56px;
+  border-color: var(--accent-light);
+  opacity: 0.5;
+}
+
+#cursor-dot.cursor-click {
+  width: 5px;
+  height: 5px;
+}
+
+#cursor-ring.cursor-click {
+  width: 26px;
+  height: 26px;
+  opacity: 1;
+}
+
+/* Hide cursor elements on touch */
+@media (pointer: coarse) {
+  #cursor-dot, #cursor-ring {
+    display: none;
+  }
+}
+
+/* Ensure content stays above particle canvas */
+.navbar, section, footer {
+  position: relative;
+  z-index: 1;
 }

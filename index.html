@@ -13,8 +13,22 @@
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Prevent dark mode flash on load -->
+  <script>
+    (function() {
+      var t = localStorage.getItem('portfolio-theme');
+      if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
 </head>
 <body>
+  <!-- Particle Canvas (fullscreen background) -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Custom Cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
 
   <!-- ═══════════════════════════════════════════════════════════
        NAVBAR
@@ -31,6 +45,25 @@
         <a href="#contact">Contact</a>
       </div>
 
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <!-- Moon icon (shown in light mode) -->
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <!-- Sun icon (shown in dark mode) -->
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      </button>
+
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
         <span></span>
         <span></span>
@@ -43,6 +76,8 @@
        HERO
        ═══════════════════════════════════════════════════════════ -->
   <section class="hero" id="hero">
+    <!-- Neural Network Canvas -->
+    <canvas id="neural-canvas"></canvas>
     <!-- Animated background orbs -->
     <div class="hero-bg-orb hero-bg-orb--1"></div>
     <div class="hero-bg-orb hero-bg-orb--2"></div>
@@ -102,12 +137,12 @@
         </p>
 
         <div class="about-cards">
-          <div class="about-card reveal reveal-delay-1">
+          <div class="about-card card reveal reveal-delay-1">
             <div class="about-card-icon">🎓</div>
             <h3>BS Computer Science</h3>
             <p>SZABIST Islamabad (2022–2026) · CGPA: 3.10 / 4.00</p>
           </div>
-          <div class="about-card reveal reveal-delay-2">
+          <div class="about-card card reveal reveal-delay-2">
             <div class="about-card-icon">🏛️</div>
             <h3>AI, ML &amp; Deep Learning</h3>
             <p>NAVTTC, Govt. of Pakistan · Certified Program</p>
@@ -143,7 +178,7 @@
 
       <div class="skills-grid">
         <!-- AI / ML -->
-        <div class="skill-category reveal reveal-delay-1">
+        <div class="skill-category card reveal reveal-delay-1" data-level="88">
           <div class="skill-category-header">
             <div class="skill-category-icon">🧠</div>
             <h3>AI / ML</h3>
@@ -161,7 +196,7 @@
         </div>
 
         <!-- ML Libraries -->
-        <div class="skill-category reveal reveal-delay-2">
+        <div class="skill-category card reveal reveal-delay-2" data-level="82">
           <div class="skill-category-header">
             <div class="skill-category-icon">📚</div>
             <h3>ML Libraries</h3>
@@ -178,7 +213,7 @@
         </div>
 
         <!-- Languages -->
-        <div class="skill-category reveal reveal-delay-3">
+        <div class="skill-category card reveal reveal-delay-3" data-level="75">
           <div class="skill-category-header">
             <div class="skill-category-icon">💻</div>
             <h3>Languages</h3>
@@ -194,7 +229,7 @@
         </div>
 
         <!-- Tools -->
-        <div class="skill-category reveal reveal-delay-4">
+        <div class="skill-category card reveal reveal-delay-4" data-level="70">
           <div class="skill-category-header">
             <div class="skill-category-icon">🛠️</div>
             <h3>Tools</h3>
@@ -224,7 +259,7 @@
       <div class="projects-grid">
 
         <!-- PROJECT 1 — Featured / Full-width -->
-        <div class="project-card featured reveal">
+        <div class="project-card card featured reveal">
           <span class="project-featured-badge">⭐ Featured · Final Year Project</span>
           <span class="project-tag">Final Year Project · 2025–2026</span>
           <h3>Faculty Tasks Automation System</h3>
@@ -248,7 +283,7 @@
         </div>
 
         <!-- PROJECT 2 -->
-        <div class="project-card reveal reveal-delay-1">
+        <div class="project-card card reveal reveal-delay-1">
           <span class="project-tag">Deep Learning · NLP</span>
           <h3>Transformer Language Model</h3>
           <p>
@@ -270,7 +305,7 @@
         </div>
 
         <!-- PROJECT 3 -->
-        <div class="project-card reveal reveal-delay-2">
+        <div class="project-card card reveal reveal-delay-2">
           <span class="project-tag">Deep Learning · Computer Vision</span>
           <h3>Cat &amp; Dog Image Classifier (CNN)</h3>
           <p>
@@ -293,7 +328,7 @@
         </div>
 
         <!-- PROJECT 4 -->
-        <div class="project-card reveal reveal-delay-1">
+        <div class="project-card card reveal reveal-delay-1">
           <span class="project-tag">Machine Learning · NLP</span>
           <h3>Spam Email Classifier — Naive Bayes from Scratch</h3>
           <p>
@@ -313,7 +348,7 @@
         </div>
 
         <!-- PROJECT 5 -->
-        <div class="project-card reveal reveal-delay-2">
+        <div class="project-card card reveal reveal-delay-2">
           <span class="project-tag">Machine Learning · Research</span>
           <h3>Ensemble ML Models — Comparative Study</h3>
           <p>
@@ -353,7 +388,7 @@
         <div class="timeline-item reveal reveal-delay-1">
           <div class="timeline-dot"></div>
           <span class="timeline-date">2025 – 2026</span>
-          <div class="timeline-content">
+          <div class="timeline-content card">
             <h3>Final Year Project: Faculty Tasks Automation System</h3>
             <p class="timeline-org">SZABIST Islamabad</p>
             <p>Solo developer — built all 12 modules from documentation to deployment, including automated marks entry, attendance tracking, and CLO analysis.</p>
@@ -364,7 +399,7 @@
         <div class="timeline-item reveal reveal-delay-2">
           <div class="timeline-dot"></div>
           <span class="timeline-date">2022 – 2026</span>
-          <div class="timeline-content">
+          <div class="timeline-content card">
             <h3>BS Computer Science</h3>
             <p class="timeline-org">SZABIST Islamabad</p>
             <p>CGPA: 3.10 / 4.00 — Coursework in AI, Image Processing, Data Science, Linear Algebra, and more.</p>
@@ -375,7 +410,7 @@
         <div class="timeline-item reveal reveal-delay-3">
           <div class="timeline-dot"></div>
           <span class="timeline-date">Certified</span>
-          <div class="timeline-content">
+          <div class="timeline-content card">
             <h3>AI, ML &amp; Deep Learning</h3>
             <p class="timeline-org">NAVTTC, Govt. of Pakistan</p>
             <p>Government-certified program covering Python, ML algorithms, Deep Learning, and Neural Networks.</p>
@@ -399,17 +434,17 @@
       </p>
 
       <div class="contact-grid">
-        <div class="contact-card reveal reveal-delay-1">
+        <div class="contact-card card reveal reveal-delay-1">
           <div class="contact-card-icon">📧</div>
           <h4>Email</h4>
           <a href="mailto:muhammadhamdan43@gmail.com">muhammadhamdan43@gmail.com</a>
         </div>
-        <div class="contact-card reveal reveal-delay-2">
+        <div class="contact-card card reveal reveal-delay-2">
           <div class="contact-card-icon">📍</div>
           <h4>Location</h4>
           <p>Islamabad, Pakistan</p>
         </div>
-        <div class="contact-card reveal reveal-delay-3">
+        <div class="contact-card card reveal reveal-delay-3">
           <div class="contact-card-icon">📞</div>
           <h4>Phone</h4>
           <p>+92 316-0458909</p>
