@@ -50,22 +50,59 @@
   typewrite();
 
   // ────────────────────────────────────────────────────────────
-  // 2. Dark / Light Mode Toggle
+  // 2. Dark / Light Mode Toggle with Dual-Persona Boot Animation
   // ────────────────────────────────────────────────────────────
   const themeToggleBtn = document.getElementById('theme-toggle');
+  const bootOverlay = document.getElementById('boot-overlay');
   const htmlEl = document.documentElement;
 
-  const savedTheme = localStorage.getItem('portfolio-theme');
-  if (savedTheme === 'dark') htmlEl.setAttribute('data-theme', 'dark');
+  // Helper to update dynamic section titles (e.g. About Me -> $ whoami)
+  function updateDynamicTitles(isDark) {
+    const titles = document.querySelectorAll('h2[data-light-title][data-dark-title]');
+    titles.forEach(function(h2) {
+      const lightTitle = h2.getAttribute('data-light-title');
+      const darkTitle = h2.getAttribute('data-dark-title');
+      h2.textContent = isDark ? darkTitle : lightTitle;
+    });
+  }
 
-  themeToggleBtn.addEventListener('click', () => {
+  const savedTheme = localStorage.getItem('portfolio-theme');
+  const initialIsDark = savedTheme === 'dark';
+  if (initialIsDark) {
+    htmlEl.setAttribute('data-theme', 'dark');
+  }
+  updateDynamicTitles(initialIsDark);
+
+  let isBooting = false;
+
+  themeToggleBtn.addEventListener('click', function() {
+    if (isBooting) return;
     const isDark = htmlEl.getAttribute('data-theme') === 'dark';
+
     if (isDark) {
+      // Switching to Light Mode: Smooth cross-fade, no boot animation
       htmlEl.removeAttribute('data-theme');
       localStorage.setItem('portfolio-theme', 'light');
+      updateDynamicTitles(false);
     } else {
-      htmlEl.setAttribute('data-theme', 'dark');
-      localStorage.setItem('portfolio-theme', 'dark');
+      // Switching to Dark Mode: Trigger Boot Sequence animation
+      isBooting = true;
+      if (bootOverlay) {
+        bootOverlay.classList.add('active');
+      }
+
+      setTimeout(function() {
+        htmlEl.setAttribute('data-theme', 'dark');
+        localStorage.setItem('portfolio-theme', 'dark');
+        updateDynamicTitles(true);
+      }, 350);
+
+      setTimeout(function() {
+        if (bootOverlay) {
+          bootOverlay.classList.remove('active');
+        }
+        isBooting = false;
+      }, 950);
     }
   });
 

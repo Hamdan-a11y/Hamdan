@@ -36,6 +36,7 @@
   /* Fonts */
   --font-heading: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 
   /* Spacing */
   --section-padding: 100px 0;
@@ -58,36 +59,192 @@
    Dark Mode Variables
    ============================================================ */
 [data-theme="dark"] {
-  --bg-primary: #0B0F1A;
-  --bg-card: #131929;
-  --bg-card-hover: #1A2035;
-  --accent: #E2E8F0;
-  --accent-light: #94A3B8;
-  --accent-glow: rgba(226, 232, 240, 0.08);
-  --accent-glow-strong: rgba(226, 232, 240, 0.16);
-  --text-primary: #F1F5F9;
-  --text-muted: #94A3B8;
-  --text-dim: #64748B;
-  --border-subtle: rgba(226, 232, 240, 0.07);
-  --border-hover: rgba(226, 232, 240, 0.18);
-  --gradient-hero: radial-gradient(ellipse 80% 60% at 50% -20%, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
-  --gradient-hero-2: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(139, 92, 246, 0.05) 0%, transparent 60%);
-  --gradient-hero-3: radial-gradient(ellipse 50% 40% at 10% 60%, rgba(59, 130, 246, 0.04) 0%, transparent 50%);
-  --navbar-scrolled-bg: rgba(11, 15, 26, 0.88);
-  --mobile-nav-bg: rgba(11, 15, 26, 0.98);
-  --btn-secondary-bg: #1A2035;
-  --social-btn-bg: #1A2035;
-  --skill-badge-bg: rgba(226, 232, 240, 0.06);
-  --featured-card-bg: linear-gradient(135deg, #131929 0%, #0F1622 100%);
-  --project-tech-bg: rgba(226, 232, 240, 0.06);
-  --project-tech-border: rgba(226, 232, 240, 0.1);
-  --project-link-bg: rgba(226, 232, 240, 0.05);
-  --project-link-border: rgba(226, 232, 240, 0.1);
-  --project-link-hover-bg: rgba(226, 232, 240, 0.1);
-  --coursework-tag-bg: rgba(226, 232, 240, 0.05);
-  --coursework-tag-border: rgba(226, 232, 240, 0.1);
-  --coursework-tag-hover-bg: rgba(226, 232, 240, 0.1);
-  --spotlight-color: rgba(255, 255, 255, 0.04);
+  /* Dark Mode — Hacker Terminal Dual Persona Palette */
+  --bg-primary: #050811;
+  --bg-card: #0B101D;
+  --bg-card-hover: #11182B;
+  --accent: #00FF9D;
+  --accent-light: #00E58D;
+  --accent-glow: rgba(0, 255, 157, 0.16);
+  --accent-glow-strong: rgba(0, 255, 157, 0.32);
+  --text-primary: #E6F1ED;
+  --text-muted: #8BA89F;
+  --text-dim: #5B7B71;
+  --border-subtle: rgba(0, 255, 157, 0.15);
+  --border-hover: rgba(0, 255, 157, 0.45);
+  --gradient-hero: radial-gradient(ellipse 80% 60% at 50% -20%, rgba(0, 255, 157, 0.09) 0%, transparent 70%);
+  --gradient-hero-2: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(0, 240, 255, 0.06) 0%, transparent 60%);
+  --gradient-hero-3: radial-gradient(ellipse 50% 40% at 10% 60%, rgba(0, 255, 157, 0.05) 0%, transparent 50%);
+  --navbar-scrolled-bg: rgba(5, 8, 17, 0.90);
+  --mobile-nav-bg: rgba(5, 8, 17, 0.98);
+  --btn-secondary-bg: #0B101D;
+  --social-btn-bg: #0B101D;
+  --skill-badge-bg: rgba(0, 255, 157, 0.08);
+  --featured-card-bg: linear-gradient(135deg, #0B101D 0%, #070B14 100%);
+  --project-tech-bg: rgba(0, 255, 157, 0.06);
+  --project-tech-border: rgba(0, 255, 157, 0.18);
+  --project-link-bg: rgba(0, 255, 157, 0.08);
+  --project-link-border: rgba(0, 255, 157, 0.25);
+  --project-link-hover-bg: rgba(0, 255, 157, 0.18);
+  --coursework-tag-bg: rgba(0, 255, 157, 0.06);
+  --coursework-tag-border: rgba(0, 255, 157, 0.2);
+  --coursework-tag-hover-bg: rgba(0, 255, 157, 0.14);
+  --spotlight-color: rgba(0, 255, 157, 0.06);
+
+  /* Monospace Typography Override */
+  --font-heading: var(--font-mono);
+  --font-body: var(--font-mono);
+
+  /* Sharper Card Radius in Dark Mode */
+  --card-radius: 6px;
+}
+
+/* ============================================================
+   Hacker Terminal Specific Styles (Dark Mode Only)
+   ============================================================ */
+[data-theme="dark"] body {
+  background-image: 
+    linear-gradient(rgba(0, 255, 157, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 157, 0.03) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+/* CRT Scanline Overlay */
+.crt-scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9990;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+}
+
+[data-theme="dark"] .crt-scanline {
+  opacity: 1;
+}
+
+/* Terminal Headings Prefix & Blinking Cursor */
+[data-theme="dark"] .section-heading h2::before {
+  content: "> ";
+  color: var(--accent);
+  text-shadow: 0 0 8px rgba(0, 255, 157, 0.6);
+}
+
+[data-theme="dark"] .section-heading h2::after {
+  content: " _";
+  color: var(--accent);
+  animation: blink-cursor 1s steps(2, start) infinite;
+  text-shadow: 0 0 8px rgba(0, 255, 157, 0.8);
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Section Dividers in Dark Mode */
+[data-theme="dark"] section {
+  border-bottom: 1px dashed rgba(0, 255, 157, 0.15);
+}
+
+/* Boot Sequence Overlay */
+.boot-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #050811;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  font-family: var(--font-mono, monospace);
+}
+
+.boot-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.boot-terminal {
+  width: 90%;
+  max-width: 500px;
+  background: #0b101d;
+  border: 1px solid #00ff9d;
+  border-radius: 6px;
+  padding: 24px 28px;
+  box-shadow: 0 0 30px rgba(0, 255, 157, 0.25);
+  color: #e6f1ed;
+}
+
+.boot-line {
+  margin-bottom: 10px;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: #8ba89f;
+  opacity: 0;
+}
+
+.boot-overlay.active .boot-line:nth-child(1) {
+  animation: bootLineType 0.25s ease forwards 0.05s;
+}
+
+.boot-overlay.active .boot-line:nth-child(2) {
+  animation: bootLineType 0.25s ease forwards 0.25s;
+}
+
+.boot-overlay.active .boot-line:nth-child(3) {
+  animation: bootLineType 0.25s ease forwards 0.50s;
+}
+
+.boot-line.highlight {
+  color: #00ff9d;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(0, 255, 157, 0.5);
+}
+
+.boot-progress-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(0, 255, 157, 0.15);
+  border-radius: 2px;
+  margin-top: 18px;
+  overflow: hidden;
+}
+
+.boot-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: #00ff9d;
+  box-shadow: 0 0 8px #00ff9d;
+}
+
+.boot-overlay.active .boot-progress-fill {
+  animation: bootProgress 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.1s;
+}
+
+@keyframes bootLineType {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bootProgress {
+  0% { width: 0%; }
+  100% { width: 100%; }
 }
 
 /* Light theme spotlight color override */
@@ -1674,16 +1831,16 @@ body {
 
 /* Dark mode orb colors */
 [data-theme="dark"] .hero-bg-orb--1 {
-  background: rgba(99, 102, 241, 0.08);
+  background: rgba(0, 255, 157, 0.12);
 }
 
 [data-theme="dark"] .hero-bg-orb--2 {
-  background: rgba(139, 92, 246, 0.05);
+  background: rgba(0, 240, 255, 0.08);
 }
 
 /* Dark mode hero gradient text */
 [data-theme="dark"] .hero h1 .gradient-text {
-  background: linear-gradient(135deg, #E2E8F0 0%, #94A3B8 50%, #64748B 100%);
+  background: linear-gradient(135deg, #00FF9D 0%, #00F0FF 60%, #E6F1ED 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1691,13 +1848,37 @@ body {
 
 /* Dark mode btn-primary */
 [data-theme="dark"] .btn-primary {
-  background: linear-gradient(135deg, #E2E8F0, #94A3B8);
-  color: #0B0F1A;
+  background: #00FF9D;
+  color: #050811;
+  font-weight: 700;
+  border: 1px solid #00FF9D;
+  box-shadow: 0 0 14px rgba(0, 255, 157, 0.35);
+  border-radius: 4px;
+}
+
+[data-theme="dark"] .btn-primary:hover {
+  background: #00E58D;
+  box-shadow: 0 0 24px rgba(0, 255, 157, 0.7);
+  transform: translateY(-2px);
+}
+
+[data-theme="dark"] .btn-secondary {
+  background: transparent;
+  color: #00FF9D;
+  border: 1px solid #00FF9D;
+  box-shadow: 0 0 10px rgba(0, 255, 157, 0.18);
+  border-radius: 4px;
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+  background: rgba(0, 255, 157, 0.12);
+  box-shadow: 0 0 18px rgba(0, 255, 157, 0.45);
 }
 
 /* Dark mode nav active link */
 [data-theme="dark"] .nav-links a:hover {
-  background: rgba(226, 232, 240, 0.05);
+  background: rgba(0, 255, 157, 0.1);
+  color: #00FF9D;
 }
 
 /* ============================================================

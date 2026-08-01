@@ -9,7 +9,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css" />
@@ -23,6 +23,19 @@
   </script>
 </head>
 <body>
+  <!-- CRT Scanline Overlay (Dark Mode Only) -->
+  <div class="crt-scanline" aria-hidden="true"></div>
+
+  <!-- Terminal Boot Sequence Overlay -->
+  <div id="boot-overlay" class="boot-overlay" aria-hidden="true">
+    <div class="boot-terminal">
+      <div class="boot-line">> INITIALIZING SYSTEM_CORE... [ OK ]</div>
+      <div class="boot-line">> LOADING MODULE: dark_mode.exe</div>
+      <div class="boot-line highlight">> ACCESS GRANTED. Welcome, Operator.</div>
+      <div class="boot-progress-bar"><div class="boot-progress-fill"></div></div>
+    </div>
+  </div>
+
   <!-- Particle Canvas (fullscreen background) -->
   <canvas id="particle-canvas"></canvas>
 
@@ -129,7 +142,7 @@
   <section id="about">
     <div class="container">
       <div class="section-heading reveal">
-        <h2>About Me</h2>
+        <h2 data-light-title="About Me" data-dark-title="$ whoami">About Me</h2>
       </div>
 
       <div class="about-grid">
@@ -254,7 +267,7 @@
   <section id="projects">
     <div class="container">
       <div class="section-heading reveal">
-        <h2>Projects</h2>
+        <h2 data-light-title="Projects" data-dark-title="$ ls ./projects">Projects</h2>
       </div>
 
       <div class="projects-grid">
