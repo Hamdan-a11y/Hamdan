@@ -900,6 +900,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .skill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-size: 0.82rem;
   font-weight: 500;
   color: var(--text-muted);
@@ -908,6 +911,13 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--skill-badge-bg);
   border: 1px solid var(--border-subtle);
   transition: all var(--transition-fast);
+}
+
+.badge-tech-icon {
+  width: 17px;
+  height: 17px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .skill-badge:hover {
@@ -1034,6 +1044,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .project-tech span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: 0.75rem;
   font-weight: 500;
   color: var(--accent-light);
