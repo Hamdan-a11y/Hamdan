@@ -268,7 +268,17 @@
       requestAnimationFrame(animate);
     }
 
+    function updateTouch(e) {
+      if (e.touches && e.touches.length > 0) {
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+      }
+    }
+
     window.addEventListener('mousemove', function(e) { mouse.x = e.clientX; mouse.y = e.clientY; });
+    window.addEventListener('touchstart', updateTouch, { passive: true });
+    window.addEventListener('touchmove', updateTouch, { passive: true });
+    window.addEventListener('touchend', function() { mouse.x = null; mouse.y = null; });
     window.addEventListener('mouseleave', function() { mouse.x = null; mouse.y = null; });
     window.addEventListener('resize', function() { resize(); init(); });
     resize(); init(); animate();
@@ -378,11 +388,22 @@
       requestAnimationFrame(animate);
     }
 
+    function updateHeroTouch(e) {
+      if (e.touches && e.touches.length > 0) {
+        var rect = hero.getBoundingClientRect();
+        mouse.x = e.touches[0].clientX - rect.left;
+        mouse.y = e.touches[0].clientY - rect.top;
+      }
+    }
+
     hero.addEventListener('mousemove', function(e) {
       var rect = hero.getBoundingClientRect();
       mouse.x = e.clientX - rect.left;
       mouse.y = e.clientY - rect.top;
     });
+    hero.addEventListener('touchstart', updateHeroTouch, { passive: true });
+    hero.addEventListener('touchmove', updateHeroTouch, { passive: true });
+    hero.addEventListener('touchend', function() { mouse.x = -999; mouse.y = -999; });
     hero.addEventListener('mouseleave', function() { mouse.x = -999; mouse.y = -999; });
     window.addEventListener('resize', resize);
     resize(); animate();
@@ -400,9 +421,8 @@
       var rafId = null;
       var MAX_TILT = 8;
 
-      card.addEventListener('mousemove', function(e) {
+      function handlePos(cx, cy) {
         if (rafId) return;
-        var cx = e.clientX, cy = e.clientY;
         rafId = requestAnimationFrame(function() {
           var rect = card.getBoundingClientRect();
           var x = cx - rect.left, y = cy - rect.top;
@@ -417,13 +437,26 @@
           card.style.setProperty('--y', y+'px');
           rafId = null;
         });
+      }
+
+      card.addEventListener('mousemove', function(e) {
+        handlePos(e.clientX, e.clientY);
       });
 
-      card.addEventListener('mouseleave', function() {
+      card.addEventListener('touchmove', function(e) {
+        if (e.touches && e.touches.length > 0) {
+          handlePos(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+
+      function resetCard() {
         if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
         card.style.transition = 'transform 0.6s cubic-bezier(0.34,1.56,0.64,1)';
         card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0)';
-      });
+      }
+
+      card.addEventListener('mouseleave', resetCard);
+      card.addEventListener('touchend', resetCard);
     });
   })();
 
@@ -672,21 +705,34 @@
           cell.setAttribute('data-date',    dateStr);
           cell.setAttribute('data-commits', cd.count);
 
-          cell.addEventListener('mouseenter', function() {
-            var c     = parseInt(this.getAttribute('data-commits'), 10);
+          function showTooltip(cx, cy) {
+            var c     = parseInt(cell.getAttribute('data-commits'), 10);
             var label = c === 0 ? 'No contributions'
                       : c === 1 ? '1 contribution'
                       : c + ' contributions';
-            tooltip.textContent = label + ' · ' + this.getAttribute('data-date');
+            tooltip.textContent = label + ' · ' + cell.getAttribute('data-date');
             tooltip.classList.add('visible');
-          }.bind(cell));
-          cell.addEventListener('mousemove', function(e) {
             var rect = tooltip.parentElement.getBoundingClientRect();
-            tooltip.style.left = (e.clientX - rect.left + 14) + 'px';
-            tooltip.style.top  = (e.clientY - rect.top  - 36) + 'px';
+            tooltip.style.left = Math.min(rect.width - 150, Math.max(10, cx - rect.left - 40)) + 'px';
+            tooltip.style.top  = (cy - rect.top - 36) + 'px';
+          }
+
+          cell.addEventListener('mouseenter', function(e) {
+            showTooltip(e.clientX, e.clientY);
           });
+          cell.addEventListener('mousemove', function(e) {
+            showTooltip(e.clientX, e.clientY);
+          });
+          cell.addEventListener('touchstart', function(e) {
+            if (e.touches && e.touches.length > 0) {
+              showTooltip(e.touches[0].clientX, e.touches[0].clientY);
+            }
+          }, { passive: true });
           cell.addEventListener('mouseleave', function() {
             tooltip.classList.remove('visible');
+          });
+          cell.addEventListener('touchend', function() {
+            setTimeout(function() { tooltip.classList.remove('visible'); }, 2000);
           });
           col.appendChild(cell);
         });
