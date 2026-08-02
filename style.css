@@ -932,15 +932,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .skill-badge:hover {
   color: var(--accent-light);
-  border-color: rgba(15, 23, 42, 0.2);
-  background: rgba(15, 23, 42, 0.05);
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
   transform: translateY(-2px);
 }
 
-.skill-badge.primary {
-  color: var(--accent-light);
-  border-color: rgba(15, 23, 42, 0.2);
-  background: rgba(15, 23, 42, 0.05);
+[data-theme="dark"] .badge-tech-icon[src*="django"] {
+  filter: brightness(0) invert(0.85);
 }
 
 /* ============================================================
