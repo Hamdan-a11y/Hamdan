@@ -10,9 +10,9 @@
   // 1. Typewriter Effect
   // ────────────────────────────────────────────────────────────
   const roles = [
-    'AI/ML Engineer',
-    'Deep Learning Developer',
-    'CS Student @ SZABIST',
+    'Python & Django Developer',
+    'Backend & Automation Developer',
+    'AI/ML Certified CS Graduate',
   ];
 
   const typewriterEl = document.getElementById('typewriter');
