@@ -104,8 +104,8 @@
    ============================================================ */
 [data-theme="dark"] body {
   background-image: 
-    linear-gradient(rgba(0, 255, 157, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 157, 0.03) 1px, transparent 1px);
+    linear-gradient(var(--grid-color, rgba(0, 255, 157, 0.03)) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color, rgba(0, 255, 157, 0.03)) 1px, transparent 1px);
   background-size: 36px 36px;
 }
 
@@ -1865,37 +1865,37 @@ body {
 
 /* Dark mode btn-primary */
 [data-theme="dark"] .btn-primary {
-  background: #00FF9D;
+  background: var(--accent);
   color: #050811;
   font-weight: 700;
-  border: 1px solid #00FF9D;
-  box-shadow: 0 0 14px rgba(0, 255, 157, 0.35);
+  border: 1px solid var(--accent);
+  box-shadow: 0 0 14px var(--accent-glow-strong);
   border-radius: 4px;
 }
 
 [data-theme="dark"] .btn-primary:hover {
-  background: #00E58D;
-  box-shadow: 0 0 24px rgba(0, 255, 157, 0.7);
+  background: var(--accent-light);
+  box-shadow: 0 0 24px var(--accent-glow-strong);
   transform: translateY(-2px);
 }
 
 [data-theme="dark"] .btn-secondary {
   background: transparent;
-  color: #00FF9D;
-  border: 1px solid #00FF9D;
-  box-shadow: 0 0 10px rgba(0, 255, 157, 0.18);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow);
   border-radius: 4px;
 }
 
 [data-theme="dark"] .btn-secondary:hover {
-  background: rgba(0, 255, 157, 0.12);
-  box-shadow: 0 0 18px rgba(0, 255, 157, 0.45);
+  background: var(--accent-glow);
+  box-shadow: 0 0 18px var(--accent-glow-strong);
 }
 
 /* Dark mode nav active link */
 [data-theme="dark"] .nav-links a:hover {
-  background: rgba(0, 255, 157, 0.1);
-  color: #00FF9D;
+  background: var(--accent-glow);
+  color: var(--accent);
 }
 
 /* ============================================================
@@ -2116,4 +2116,331 @@ body {
 .navbar, section, footer {
   position: relative;
   z-index: 1;
+}
+
+/* ============================================================
+   FEATURE 7 — Palette Customizer & Theme Overrides
+   ============================================================ */
+
+/* 1. Palette Toggle Button */
+.palette-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+  background: var(--btn-secondary-bg);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+  margin-right: 8px;
+}
+
+.palette-toggle:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+  background: var(--bg-card-hover);
+  transform: rotate(20deg) scale(1.05);
+}
+
+.palette-toggle svg {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--transition-fast);
+}
+
+/* 2. Palette Presets Override Definitions */
+
+/* Matrix Theme (Default Dark Override if set explicitly) */
+[data-palette="matrix"] {
+  --accent: #00FF9D;
+  --accent-light: #00E58D;
+  --accent-glow: rgba(0, 255, 157, 0.16);
+  --accent-glow-strong: rgba(0, 255, 157, 0.32);
+  --border-subtle: rgba(0, 255, 157, 0.15);
+  --border-hover: rgba(0, 255, 157, 0.45);
+  --spotlight-color: rgba(0, 255, 157, 0.06);
+  --grid-color: rgba(0, 255, 157, 0.03);
+}
+
+/* Cyberpunk Neon */
+[data-palette="cyberpunk"] {
+  --accent: #00F0FF;
+  --accent-light: #FF007F;
+  --accent-glow: rgba(0, 240, 255, 0.16);
+  --accent-glow-strong: rgba(255, 0, 127, 0.32);
+  --border-subtle: rgba(0, 240, 255, 0.2);
+  --border-hover: rgba(255, 0, 127, 0.5);
+  --spotlight-color: rgba(0, 240, 255, 0.08);
+  --grid-color: rgba(0, 240, 255, 0.03);
+}
+
+/* Synthwave Purple */
+[data-palette="synthwave"] {
+  --accent: #8B5CF6;
+  --accent-light: #EC4899;
+  --accent-glow: rgba(139, 92, 246, 0.16);
+  --accent-glow-strong: rgba(236, 72, 153, 0.32);
+  --border-subtle: rgba(139, 92, 246, 0.2);
+  --border-hover: rgba(236, 72, 153, 0.5);
+  --spotlight-color: rgba(139, 92, 246, 0.08);
+  --grid-color: rgba(139, 92, 246, 0.03);
+}
+
+/* Solarized Amber */
+[data-palette="solarized"] {
+  --accent: #F59E0B;
+  --accent-light: #EF4444;
+  --accent-glow: rgba(245, 158, 11, 0.16);
+  --accent-glow-strong: rgba(239, 68, 68, 0.32);
+  --border-subtle: rgba(245, 158, 11, 0.2);
+  --border-hover: rgba(239, 68, 68, 0.5);
+  --spotlight-color: rgba(245, 158, 11, 0.08);
+  --grid-color: rgba(245, 158, 11, 0.03);
+}
+
+/* Nordic Emerald */
+[data-palette="nordic"] {
+  --accent: #10B981;
+  --accent-light: #06B6D4;
+  --accent-glow: rgba(16, 185, 129, 0.16);
+  --accent-glow-strong: rgba(6, 182, 212, 0.32);
+  --border-subtle: rgba(16, 185, 129, 0.2);
+  --border-hover: rgba(6, 182, 212, 0.5);
+  --spotlight-color: rgba(16, 185, 129, 0.08);
+  --grid-color: rgba(16, 185, 129, 0.03);
+}
+
+/* Platinum Slate (Light Theme Accent Overrides) */
+[data-palette="platinum"] {
+  --accent: #0F172A;
+  --accent-light: #334155;
+  --accent-glow: rgba(15, 23, 42, 0.08);
+  --accent-glow-strong: rgba(15, 23, 42, 0.16);
+  --border-subtle: rgba(15, 23, 42, 0.12);
+  --border-hover: rgba(15, 23, 42, 0.3);
+  --spotlight-color: rgba(15, 23, 42, 0.05);
+  --grid-color: rgba(15, 23, 42, 0.02);
+}
+
+/* Custom HSL Hue Selector Overrides */
+[data-palette="custom"] {
+  --accent: hsl(var(--custom-hue, 150), 100%, 50%);
+  --accent-light: hsl(var(--custom-hue, 150), 100%, 40%);
+  --accent-glow: hsla(var(--custom-hue, 150), 100%, 50%, 0.16);
+  --accent-glow-strong: hsla(var(--custom-hue, 150), 100%, 40%, 0.32);
+  --border-subtle: hsla(var(--custom-hue, 150), 100%, 50%, 0.2);
+  --border-hover: hsla(var(--custom-hue, 150), 100%, 40%, 0.5);
+  --spotlight-color: hsla(var(--custom-hue, 150), 100%, 50%, 0.08);
+  --grid-color: hsla(var(--custom-hue, 150), 100%, 50%, 0.03);
+}
+
+/* Light mode modifications for custom theme accent readability */
+[data-theme="light"][data-palette="custom"],
+:root:not([data-theme="dark"])[data-palette="custom"] {
+  --accent: hsl(var(--custom-hue, 150), 85%, 35%);
+  --accent-light: hsl(var(--custom-hue, 150), 85%, 25%);
+  --accent-glow: hsla(var(--custom-hue, 150), 85%, 35%, 0.08);
+  --accent-glow-strong: hsla(var(--custom-hue, 150), 85%, 35%, 0.16);
+  --border-subtle: hsla(var(--custom-hue, 150), 85%, 35%, 0.12);
+  --border-hover: hsla(var(--custom-hue, 150), 85%, 35%, 0.25);
+  --spotlight-color: hsla(var(--custom-hue, 150), 85%, 35%, 0.04);
+}
+
+/* 3. Palette Studio Window */
+.palette-studio {
+  position: fixed;
+  bottom: 80px;
+  right: 24px;
+  width: 320px;
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--card-radius);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  padding: 24px;
+  z-index: 9995;
+  transform: translateY(20px) scale(0.95);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              opacity 0.3s ease,
+              background-color 0.35s ease,
+              border-color 0.35s ease;
+}
+
+.palette-studio.active {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: all;
+  border-color: var(--accent);
+  box-shadow: 0 10px 40px var(--accent-glow);
+}
+
+.palette-studio-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 12px;
+}
+
+.palette-studio-header h3 {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#palette-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: color var(--transition-fast);
+  padding: 0 4px;
+}
+
+#palette-close:hover {
+  color: var(--accent);
+}
+
+.palette-section-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.palette-presets {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.palette-preset-btn {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: var(--preset-color);
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.palette-preset-btn:hover {
+  transform: scale(1.15);
+}
+
+.palette-preset-btn.active {
+  border-color: var(--text-primary);
+  box-shadow: 0 0 10px var(--preset-color);
+  transform: scale(1.1);
+}
+
+.palette-divider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 20px 0;
+}
+
+.palette-slider-container {
+  margin-bottom: 24px;
+}
+
+/* Custom range slider styling */
+.palette-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(to right, 
+    #ff0000 0%, #ffff00 17%, #00ff00 33%, 
+    #00ffff 50%, #0000ff 67%, #ff00ff 83%, #ff0000 100%
+  );
+  outline: none;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.palette-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #0f172a;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.palette-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.palette-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #0f172a;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.palette-slider-indicators {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+}
+
+.palette-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.palette-action-btn {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.palette-action-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+  color: var(--accent);
+}
+
+/* Ensure studio works well on mobile screen widths */
+@media (max-width: 480px) {
+  .palette-studio {
+    right: 16px;
+    bottom: 74px;
+    width: calc(100% - 32px);
+  }
 }

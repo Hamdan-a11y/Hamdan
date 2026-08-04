@@ -14,11 +14,15 @@
   <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css?v=1.0.2" />
 
-  <!-- Prevent dark mode flash on load -->
+  <!-- Prevent dark mode & palette flash on load -->
   <script>
     (function() {
       var t = localStorage.getItem('portfolio-theme');
       if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      var p = localStorage.getItem('portfolio-palette');
+      if (p) document.documentElement.setAttribute('data-palette', p);
+      var h = localStorage.getItem('portfolio-hue');
+      if (h) document.documentElement.style.setProperty('--custom-hue', h);
     })();
   </script>
 </head>
@@ -58,6 +62,16 @@
         <a href="#github">GitHub</a>
         <a href="#contact">Contact</a>
       </div>
+
+      <button class="palette-toggle" id="palette-toggle" aria-label="Open Palette Studio">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 14.7255 3.09032 17.1962 4.85857 19C5.32111 19.4625 5.55238 19.6938 5.82855 19.8469C6.10471 20 6.4673 20 7.19247 20H8C8.55228 20 9 20.4477 9 21C9 21.5523 9.44772 22 10 22H12Z"/>
+          <circle cx="7.5" cy="10.5" r="1.5" fill="currentColor"/>
+          <circle cx="11.5" cy="7.5" r="1.5" fill="currentColor"/>
+          <circle cx="16.5" cy="9.5" r="1.5" fill="currentColor"/>
+          <circle cx="15.5" cy="14.5" r="1.5" fill="currentColor"/>
+        </svg>
+      </button>
 
       <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
         <!-- Moon icon (shown in light mode) -->
@@ -615,6 +629,42 @@
       </div>
     </div>
   </footer>
+
+  <!-- Palette Studio Popover -->
+  <div id="palette-studio" class="palette-studio" aria-hidden="true">
+    <div class="palette-studio-header">
+      <h3>🎨 Palette Studio</h3>
+      <button id="palette-close" aria-label="Close Palette Studio">&times;</button>
+    </div>
+    <div class="palette-studio-body">
+      <p class="palette-section-title">Select Preset Theme</p>
+      <div class="palette-presets">
+        <button class="palette-preset-btn active" data-preset="matrix" title="Matrix Cyber Hack" style="--preset-color: #00FF9D;"></button>
+        <button class="palette-preset-btn" data-preset="cyberpunk" title="Cyberpunk Neon" style="--preset-color: #00F0FF;"></button>
+        <button class="palette-preset-btn" data-preset="synthwave" title="Synthwave Purple" style="--preset-color: #8B5CF6;"></button>
+        <button class="palette-preset-btn" data-preset="solarized" title="Solarized Amber" style="--preset-color: #F59E0B;"></button>
+        <button class="palette-preset-btn" data-preset="nordic" title="Nordic Emerald" style="--preset-color: #10B981;"></button>
+        <button class="palette-preset-btn" data-preset="platinum" title="Platinum Slate (Light Theme)" style="--preset-color: #0F172A;"></button>
+      </div>
+
+      <div class="palette-divider"></div>
+
+      <p class="palette-section-title">Or Dial Accent Hue</p>
+      <div class="palette-slider-container">
+        <input type="range" id="palette-hue-slider" min="0" max="360" value="150" class="palette-slider" />
+        <div class="palette-slider-indicators">
+          <span>0°</span>
+          <span>120°</span>
+          <span>240°</span>
+          <span>360°</span>
+        </div>
+      </div>
+
+      <div class="palette-actions">
+        <button id="palette-reset" class="palette-action-btn">Reset to Default</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script src="script.js"></script>

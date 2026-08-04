@@ -5,6 +5,24 @@
 
 (function () {
   'use strict';
+  
+  // Helper to parse any CSS color variable dynamically to [R, G, B]
+  function getColorRGB(cssVar, fallbackRGB) {
+    var val = getComputedStyle(document.documentElement).getPropertyValue(cssVar).trim();
+    if (!val) return fallbackRGB;
+    var canvas = document.createElement('canvas');
+    canvas.width = 1; canvas.height = 1;
+    var ctx = canvas.getContext('2d');
+    ctx.fillStyle = val;
+    var parsed = ctx.fillStyle;
+    if (parsed.startsWith('#')) {
+      return [parseInt(parsed.slice(1, 3), 16), parseInt(parsed.slice(3, 5), 16), parseInt(parsed.slice(5, 7), 16)];
+    } else if (parsed.startsWith('rgb')) {
+      var match = parsed.match(/\d+/g);
+      if (match) return [parseInt(match[0]), parseInt(match[1]), parseInt(match[2])];
+    }
+    return fallbackRGB;
+  }
 
   // ────────────────────────────────────────────────────────────
   // 1. Typewriter Effect
@@ -223,8 +241,8 @@
     function animate() {
       ctx.clearRect(0, 0, W, H);
       var dark = isDarkMode();
-      var pc = dark ? '130,160,255' : '15,23,42';
-      var lc = dark ? '100,140,255' : '15,23,42';
+      var pc = dark ? getColorRGB('--accent', [0, 255, 157]).join(',') : '15,23,42';
+      var lc = dark ? getColorRGB('--accent-light', [0, 229, 141]).join(',') : '15,23,42';
 
       for (var i = 0; i < particles.length; i++) {
         var p = particles[i];
@@ -331,8 +349,10 @@
       ctx.clearRect(0, 0, W, H);
       t += 0.012;
       var dark = isDarkMode();
-      var nr = dark?130:15, ng = dark?160:23, nb = dark?255:42;
-      var er = dark?100:51, eg = dark?140:65, eb = dark?255:85;
+      var nodeColor = dark ? getColorRGB('--accent', [0, 255, 157]) : [15, 23, 42];
+      var edgeColor = dark ? getColorRGB('--accent-light', [0, 229, 141]) : [51, 65, 85];
+      var nr = nodeColor[0], ng = nodeColor[1], nb = nodeColor[2];
+      var er = edgeColor[0], eg = edgeColor[1], eb = edgeColor[2];
 
       nodes.forEach(function(n) {
         if (Math.random() < 0.005) n.target = Math.random();
@@ -864,6 +884,123 @@
         gridEl.style.opacity = '0.99';
         setTimeout(function() { gridEl.style.opacity = '1'; }, 50);
       });
+    }
+  })();
+
+  // ────────────────────────────────────────────────────────────
+  // 7. Palette Studio Customizer Feature
+  // ────────────────────────────────────────────────────────────
+  (function initPaletteStudio() {
+    var toggleBtn  = document.getElementById('palette-toggle');
+    var studioEl   = document.getElementById('palette-studio');
+    var closeBtn   = document.getElementById('palette-close');
+    var resetBtn   = document.getElementById('palette-reset');
+    var hueSlider  = document.getElementById('palette-hue-slider');
+    var presetBtns = document.querySelectorAll('.palette-preset-btn');
+    var htmlEl     = document.documentElement;
+
+    if (!toggleBtn || !studioEl) return;
+
+    // --- Helper to clear active preset button states ---
+    function clearPresetActive() {
+      presetBtns.forEach(function(btn) {
+        btn.classList.remove('active');
+      });
+    }
+
+    // --- Open/Close Studio Popover ---
+    toggleBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var active = studioEl.classList.toggle('active');
+      studioEl.setAttribute('aria-hidden', !active);
+    });
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        studioEl.classList.remove('active');
+        studioEl.setAttribute('aria-hidden', 'true');
+      });
+    }
+
+    // Close when clicking outside the studio container
+    document.addEventListener('click', function(e) {
+      if (studioEl.classList.contains('active') && !studioEl.contains(e.target) && e.target !== toggleBtn) {
+        studioEl.classList.remove('active');
+        studioEl.setAttribute('aria-hidden', 'true');
+      }
+    });
+
+    // Prevent closing when clicking inside the studio container
+    studioEl.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+
+    // --- Switch to Preset theme ---
+    presetBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var preset = btn.getAttribute('data-preset');
+        clearPresetActive();
+        btn.classList.add('active');
+
+        // Apply theme attribute
+        htmlEl.setAttribute('data-palette', preset);
+        localStorage.setItem('portfolio-palette', preset);
+
+        // Reset custom hue settings
+        htmlEl.style.removeProperty('--custom-hue');
+        localStorage.removeItem('portfolio-hue');
+      });
+    });
+
+    // --- Drag custom HSL Hue Slider ---
+    if (hueSlider) {
+      hueSlider.addEventListener('input', function() {
+        var hueVal = hueSlider.value;
+        clearPresetActive();
+
+        htmlEl.setAttribute('data-palette', 'custom');
+        htmlEl.style.setProperty('--custom-hue', hueVal);
+
+        localStorage.setItem('portfolio-palette', 'custom');
+        localStorage.setItem('portfolio-hue', hueVal);
+      });
+    }
+
+    // --- Reset to Default (Matrix Green) ---
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function() {
+        clearPresetActive();
+        // default preset is matrix
+        var defaultPresetBtn = document.querySelector('.palette-preset-btn[data-preset="matrix"]');
+        if (defaultPresetBtn) defaultPresetBtn.classList.add('active');
+
+        htmlEl.setAttribute('data-palette', 'matrix');
+        localStorage.setItem('portfolio-palette', 'matrix');
+
+        htmlEl.style.removeProperty('--custom-hue');
+        localStorage.removeItem('portfolio-hue');
+        if (hueSlider) hueSlider.value = 150; // default green-ish hue
+      });
+    }
+
+    // --- Restore Preferences on Load ---
+    var savedPalette = localStorage.getItem('portfolio-palette') || 'matrix';
+    var savedHue     = localStorage.getItem('portfolio-hue');
+
+    clearPresetActive();
+    var activeBtn = document.querySelector('.palette-preset-btn[data-preset="' + savedPalette + '"]');
+    if (activeBtn) {
+      activeBtn.classList.add('active');
+    }
+
+    if (savedPalette === 'custom' && savedHue) {
+      htmlEl.setAttribute('data-palette', 'custom');
+      htmlEl.style.setProperty('--custom-hue', savedHue);
+      if (hueSlider) hueSlider.value = savedHue;
+    } else {
+      htmlEl.setAttribute('data-palette', savedPalette);
+      if (hueSlider) hueSlider.value = 150;
     }
   })();
 
