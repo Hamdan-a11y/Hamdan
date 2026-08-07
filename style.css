@@ -303,12 +303,19 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  cursor: auto !important;
 }
 
 body {
   font-family: var(--font-body);
   background-color: var(--bg-primary);
   color: var(--text-primary);
+  cursor: auto !important;
+}
+
+a, button, [role="button"], input[type="submit"], input[type="button"], .btn, .card, .nav-links a, .skill-badge, .coursework-tag, .project-link, .theme-toggle, .nav-toggle, .palette-toggle {
+  cursor: pointer !important;
+}
   line-height: 1.7;
   overflow-x: hidden;
 }
