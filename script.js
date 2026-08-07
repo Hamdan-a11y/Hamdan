@@ -323,43 +323,7 @@
     });
   })();
 
-  // ══════════════════════════════════════════════════════════
-  // FEATURE 5 — Custom Animated Cursor
-  // ══════════════════════════════════════════════════════════
-  (function initCustomCursor() {
-    if (!window.matchMedia('(pointer: fine)').matches) return;
-    var dot = document.getElementById('cursor-dot');
-    var ring = document.getElementById('cursor-ring');
-    if (!dot || !ring) return;
 
-    var mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
-    var LERP = 0.14;
-
-    document.addEventListener('mousemove', function(e) {
-      mouseX = e.clientX; mouseY = e.clientY;
-      dot.style.left = mouseX + 'px';
-      dot.style.top = mouseY + 'px';
-    });
-
-    function animateRing() {
-      ringX += (mouseX - ringX) * LERP;
-      ringY += (mouseY - ringY) * LERP;
-      ring.style.left = ringX + 'px';
-      ring.style.top = ringY + 'px';
-      requestAnimationFrame(animateRing);
-    }
-    animateRing();
-
-    document.querySelectorAll('a, button, .card, .skill-badge, .coursework-tag, .project-link, .theme-toggle, .nav-toggle').forEach(function(el) {
-      el.addEventListener('mouseenter', function() { dot.classList.add('cursor-hover'); ring.classList.add('cursor-hover'); });
-      el.addEventListener('mouseleave', function() { dot.classList.remove('cursor-hover'); ring.classList.remove('cursor-hover'); });
-    });
-
-    document.addEventListener('mousedown', function() { dot.classList.add('cursor-click'); ring.classList.add('cursor-click'); });
-    document.addEventListener('mouseup', function() { dot.classList.remove('cursor-click'); ring.classList.remove('cursor-click'); });
-    document.addEventListener('mouseleave', function() { dot.style.opacity='0'; ring.style.opacity='0'; });
-    document.addEventListener('mouseenter', function() { dot.style.opacity='1'; ring.style.opacity='0.7'; });
-  })();
 
   // ══════════════════════════════════════════════════════════
   // FEATURE 6 — GitHub Activity Heatmap + Live Stats
