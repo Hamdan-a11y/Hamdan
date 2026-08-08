@@ -1089,6 +1089,28 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 4px 15px var(--accent-glow);
 }
 
+.project-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: auto;
+}
+
+.project-link.btn-live {
+  background: var(--gradient-primary);
+  color: #0F172A;
+  font-weight: 700;
+  border: none;
+}
+
+.project-link.btn-live:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px var(--accent-glow);
+}
+
+
 /* ============================================================
    Experience / Timeline Section
    ============================================================ */
