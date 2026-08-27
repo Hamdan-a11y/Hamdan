@@ -1,1 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Muhammad Hamdan-Python/Django Web Developer &amp; Backend Developer</title>
+  <meta name="description" content="Portfolio of Muhammad Hamdan — Python/Django Web Developer, Backend Developer, Automation Engineer, and CS graduate from SZABIST Islamabad." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css?v=1.0.4" />
+
+  <!-- Prevent dark mode & palette flash on load -->
+  <script>
+    (function() {
+      var t = localStorage.getItem('portfolio-theme');
+      if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      var p = localStorage.getItem('portfolio-palette');
+      if (p) document.documentElement.setAttribute('data-palette', p);
+      var h = localStorage.getItem('portfolio-hue');
+      if (h) document.documentElement.style.setProperty('--custom-hue', h);
+    })();
+  </script>
+</head>
+<body>
+  <!-- CRT Scanline Overlay (Dark Mode Only) -->
+  <div class="crt-scanline" aria-hidden="true"></div>
+
+  <!-- Terminal Boot Sequence Overlay -->
+  <div id="boot-overlay" class="boot-overlay" aria-hidden="true">
+    <div class="boot-terminal">
+      <div class="boot-line">> INITIALIZING SYSTEM_CORE... [ OK ]</div>
+      <div class="boot-line">> LOADING MODULE: dark_mode.exe</div>
+      <div class="boot-line highlight">> ACCESS GRANTED. Welcome, Operator.</div>
+      <div class="boot-progress-bar"><div class="boot-progress-fill"></div></div>
+    </div>
+  </div>
+
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       NAVBAR
+       ═══════════════════════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#" class="nav-brand">Muhammad <span>Hamdan</span></a>
+
+      <div class="nav-links" id="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#github">GitHub</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <button class="palette-toggle" id="palette-toggle" aria-label="Open Palette Studio">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 14.7255 3.09032 17.1962 4.85857 19C5.32111 19.4625 5.55238 19.6938 5.82855 19.8469C6.10471 20 6.4673 20 7.19247 20H8C8.55228 20 9 20.4477 9 21C9 21.5523 9.44772 22 10 22H12Z"/>
+          <circle cx="7.5" cy="10.5" r="1.5" fill="currentColor"/>
+          <circle cx="11.5" cy="7.5" r="1.5" fill="currentColor"/>
+          <circle cx="16.5" cy="9.5" r="1.5" fill="currentColor"/>
+          <circle cx="15.5" cy="14.5" r="1.5" fill="currentColor"/>
+        </svg>
+      </button>
+
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <!-- Moon icon (shown in light mode) -->
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <!-- Sun icon (shown in dark mode) -->
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      </button>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HERO
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <!-- Animated background orbs -->
+    <div class="hero-bg-orb hero-bg-orb--1"></div>
+    <div class="hero-bg-orb hero-bg-orb--2"></div>
+
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-label">
+          <span class="pulse-dot"></span>
+          Open to Opportunities
+        </div>
+
+        <h1>Muhammad<br /><span class="gradient-text">Hamdan</span></h1>
+
+        <div class="hero-typewriter-wrapper">
+          I'm a <span class="typewriter-text" id="typewriter"></span>
+        </div>
+
+        <p class="hero-tagline">
+          Python/Django web developer &amp; CS graduate building full-stack web applications, browser automation systems, and web scraping tools.
+        </p>
+
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary">
+            View My Projects
+          </a>
+          <a href="Muhammad_Hamdan__CV.pdf" class="btn btn-secondary" target="_blank">
+            Download Resume
+          </a>
+        </div>
+
+        <div class="hero-socials">
+          <a href="https://github.com/Hamdan-a11y" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       ABOUT
+       ═══════════════════════════════════════════════════════════ -->
+  <section id="about">
+    <div class="container">
+      <div class="section-heading reveal">
+        <h2 data-light-title="About Me" data-dark-title="$ whoami">About Me</h2>
+      </div>
+
+      <div class="about-grid">
+        <p class="about-bio reveal">
+          Python/Django web developer and CS graduate from SZABIST Islamabad (2022–2026) with hands-on experience building full-stack web applications, browser automation systems, and web scraping tools. Certified in AI, Machine Learning &amp; Deep Learning (NAVTTC) with practical deep learning and NLP project experience. Seeking a junior web developer or backend developer role.
+        </p>
+
+        <div class="about-cards">
+          <div class="about-card card reveal reveal-delay-1">
+            <h3>BS Computer Science</h3>
+            <p>SZABIST Islamabad (2022–2026) (Completed) · CGPA: 3.11 / 4.00</p>
+          </div>
+          <div class="about-card card reveal reveal-delay-2">
+            <h3>AI, ML &amp; Deep Learning</h3>
+            <p>NAVTTC, Govt. of Pakistan · Certified Program</p>
+          </div>
+        </div>
+
+        <div class="coursework reveal reveal-delay-3">
+          <h3>Relevant Coursework</h3>
+          <div class="coursework-tags">
+            <span class="coursework-tag">Artificial Intelligence</span>
+            <span class="coursework-tag">Digital Image Processing</span>
+            <span class="coursework-tag">Intro to Data Science</span>
+            <span class="coursework-tag">Probability &amp; Statistics</span>
+            <span class="coursework-tag">Linear Algebra</span>
+            <span class="coursework-tag">Data Structures &amp; Algorithms</span>
+            <span class="coursework-tag">DBMS</span>
+            <span class="coursework-tag">OS</span>
+            <span class="coursework-tag">Computer Networks</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SKILLS
+       ═══════════════════════════════════════════════════════════ -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-heading reveal">
+        <h2>Technical Skills</h2>
+      </div>
+
+      <div class="skills-grid">
+        <!-- Backend -->
+        <div class="skill-category card reveal reveal-delay-1" data-level="90">
+          <div class="skill-category-header">
+            <h3>Backend</h3>
+          </div>
+          <div class="skill-badges">
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="badge-tech-icon" alt="" /> Python</span>
+            <span class="skill-badge"><img src="https://cdn.simpleicons.org/django/44B78B" class="badge-tech-icon" alt="" /> Django</span>
+            <span class="skill-badge"><img src="https://cdn.simpleicons.org/fastapi/009688" class="badge-tech-icon" alt="" /> REST APIs</span>
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/selenium/selenium-original.svg" class="badge-tech-icon" alt="" /> Selenium (automation &amp; scraping)</span>
+          </div>
+        </div>
+
+        <!-- Frontend -->
+        <div class="skill-category card reveal reveal-delay-2" data-level="85">
+          <div class="skill-category-header">
+            <h3>Frontend</h3>
+          </div>
+          <div class="skill-badges">
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="badge-tech-icon" alt="" /> HTML5</span>
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="badge-tech-icon" alt="" /> CSS3</span>
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="badge-tech-icon" alt="" /> JavaScript</span>
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" class="badge-tech-icon" alt="" /> TypeScript</span>
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" class="badge-tech-icon" alt="" /> React (basics)</span>
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" class="badge-tech-icon" alt="" /> Node.js (basics)</span>
+          </div>
+        </div>
+
+        <!-- Scraping & Automation -->
+        <div class="skill-category card reveal reveal-delay-3" data-level="88">
+          <div class="skill-category-header">
+            <h3>Web Scraping &amp; Automation</h3>
+          </div>
+          <div class="skill-badges">
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/selenium/selenium-original.svg" class="badge-tech-icon" alt="" /> Selenium</span>
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="badge-tech-icon" alt="" /> BeautifulSoup</span>
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="badge-tech-icon" alt="" /> Requests</span>
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="badge-tech-icon" alt="" /> Python Automations</span>
+          </div>
+        </div>
+
+        <!-- Database -->
+        <div class="skill-category card reveal reveal-delay-4" data-level="80">
+          <div class="skill-category-header">
+            <h3>Database</h3>
+          </div>
+          <div class="skill-badges">
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" class="badge-tech-icon" alt="" /> MySQL</span>
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" class="badge-tech-icon" alt="" /> SQLite</span>
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" class="badge-tech-icon" alt="" /> Firebase</span>
+          </div>
+        </div>
+
+        <!-- AI / ML -->
+        <div class="skill-category card reveal reveal-delay-1" data-level="82">
+          <div class="skill-category-header">
+            <h3>AI / ML</h3>
+          </div>
+          <div class="skill-badges">
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" class="badge-tech-icon" alt="" /> TensorFlow</span>
+            <span class="skill-badge"><img src="https://cdn.simpleicons.org/keras/D00000" class="badge-tech-icon" alt="" /> Keras</span>
+            <span class="skill-badge"><img src="https://cdn.simpleicons.org/scikitlearn/F7931E" class="badge-tech-icon" alt="" /> scikit-learn</span>
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg" class="badge-tech-icon" alt="" /> OpenCV</span>
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" class="badge-tech-icon" alt="" /> NumPy</span>
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" class="badge-tech-icon" alt="" /> Pandas</span>
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="badge-tech-icon" alt="" /> Matplotlib</span>
+          </div>
+        </div>
+
+        <!-- Tools & Environments -->
+        <div class="skill-category card reveal reveal-delay-2" data-level="78">
+          <div class="skill-category-header">
+            <h3>Tools &amp; Environments</h3>
+          </div>
+          <div class="skill-badges">
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" class="badge-tech-icon" alt="" /> Git</span>
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" class="badge-tech-icon" alt="" /> Docker</span>
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" class="badge-tech-icon" alt="" /> VS Code</span>
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pycharm/pycharm-original.svg" class="badge-tech-icon" alt="" /> PyCharm</span>
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" class="badge-tech-icon" alt="" /> Jupyter Notebook</span>
+            <span class="skill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" class="badge-tech-icon" alt="" /> MySQL Workbench</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PROJECTS
+       ═══════════════════════════════════════════════════════════ -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-heading reveal">
+        <h2 data-light-title="Projects" data-dark-title="$ ls ./projects">Projects</h2>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- PROJECT 1 — Featured / Full-width -->
+        <div class="project-card card featured reveal">
+          <span class="project-featured-badge">Featured · Final Year Project</span>
+          <span class="project-tag">Final Year Project · 2025–2026</span>
+          <h3>Faculty Tasks Automation System</h3>
+          <p>
+            Built all 12 modules solo — handled everything from documentation to final implementation.
+            Developed data pipelines for student performance tracking, CLO achievement analysis, and at-risk
+            student detection. Used Python and Selenium to automate marks entry, attendance tracking, and
+            report generation.
+          </p>
+          <div class="project-tech">
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="badge-tech-icon" alt="" /> Python</span>
+            <span><img src="https://cdn.simpleicons.org/django/44B78B" class="badge-tech-icon" alt="" /> Django</span>
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/selenium/selenium-original.svg" class="badge-tech-icon" alt="" /> Selenium</span>
+            <span><img src="https://cdn.simpleicons.org/google/4285F4" class="badge-tech-icon" alt="" /> Google APIs</span>
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" class="badge-tech-icon" alt="" /> Git</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/Hamdan-a11y" class="project-link" target="_blank" rel="noopener noreferrer">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View on GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- PROJECT 2 -->
+        <div class="project-card card reveal reveal-delay-1">
+          <span class="project-tag">Mobile &amp; Web App · React Native</span>
+          <h3>HabitPulse — Habit Tracker</h3>
+          <p>
+            Cross-platform habit and daily routine tracking application built with React Native and Expo.
+            Features streak monitoring, progress analytics, persistent local storage, and a modern responsive UI.
+          </p>
+          <div class="project-tech">
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" class="badge-tech-icon" alt="" /> React Native</span>
+            <span><img src="https://cdn.simpleicons.org/expo/4630EB" class="badge-tech-icon" alt="" /> Expo</span>
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" class="badge-tech-icon" alt="" /> TypeScript</span>
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="badge-tech-icon" alt="" /> CSS3</span>
+          </div>
+          <div class="project-links">
+            <a href="https://hamdan-a11y.github.io/habit-pulse/" class="project-link btn-live" target="_blank" rel="noopener noreferrer">
+              🌐 Live Demo
+            </a>
+            <a href="https://github.com/Hamdan-a11y/habit-pulse" class="project-link" target="_blank" rel="noopener noreferrer">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View on GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- PROJECT 3 -->
+        <div class="project-card card reveal reveal-delay-2">
+          <span class="project-tag">Frontend · Web Dev</span>
+          <h3>ZABDESK Dummy Portal</h3>
+          <p>
+            Recreated the SZABIST university portal ZABDESK UI as a pixel-accurate frontend clone.
+            Implemented multi-page navigation, login form, and responsive legacy-style layout from scratch.
+          </p>
+          <div class="project-tech">
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="badge-tech-icon" alt="" /> HTML5</span>
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="badge-tech-icon" alt="" /> CSS3</span>
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="badge-tech-icon" alt="" /> JavaScript</span>
+          </div>
+          <div class="project-links">
+            <a href="https://hamdan-a11y.github.io/ZABDESK-Dummy-Portal/" class="project-link btn-live" target="_blank" rel="noopener noreferrer">
+              🌐 Live Demo
+            </a>
+            <a href="https://github.com/Hamdan-a11y/ZABDESK-Dummy-Portal" class="project-link" target="_blank" rel="noopener noreferrer">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View on GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- PROJECT 4 -->
+        <div class="project-card card reveal reveal-delay-1">
+          <span class="project-tag">Frontend · JavaScript</span>
+          <h3>JavaScript Chess Game</h3>
+          <p>
+            Built a fully functional browser-based chess game with move validation and turn management.
+            Implemented all piece logic, check/checkmate detection, and interactive UI with zero frameworks.
+          </p>
+          <div class="project-tech">
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="badge-tech-icon" alt="" /> HTML5</span>
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="badge-tech-icon" alt="" /> CSS3</span>
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="badge-tech-icon" alt="" /> Vanilla JavaScript</span>
+          </div>
+          <div class="project-links">
+            <a href="https://hamdan-a11y.github.io/JavaScript-Chess-Game/" class="project-link btn-live" target="_blank" rel="noopener noreferrer">
+              🌐 Live Demo
+            </a>
+            <a href="https://github.com/Hamdan-a11y/JavaScript-Chess-Game" class="project-link" target="_blank" rel="noopener noreferrer">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View on GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- PROJECT 5 -->
+        <div class="project-card card reveal reveal-delay-2">
+          <span class="project-tag">Frontend · CSS3</span>
+          <h3>CSS Components Showcase</h3>
+          <p>
+            Curated gallery of custom, reusable UI components including glassmorphism cards, animated buttons, modal dialogues, and responsive navigation bars built with modern CSS3.
+          </p>
+          <div class="project-tech">
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="badge-tech-icon" alt="" /> HTML5</span>
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="badge-tech-icon" alt="" /> CSS3</span>
+          </div>
+          <div class="project-links">
+            <a href="https://hamdan-a11y.github.io/css-components-showcase/" class="project-link btn-live" target="_blank" rel="noopener noreferrer">
+              🌐 Live Demo
+            </a>
+            <a href="https://github.com/Hamdan-a11y/css-components-showcase" class="project-link" target="_blank" rel="noopener noreferrer">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View on GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- PROJECT 6 -->
+        <div class="project-card card reveal reveal-delay-1">
+          <span class="project-tag">Frontend · Web App</span>
+          <h3>Random Project Idea Generator</h3>
+          <p>
+            Interactive web utility that generates unique development project ideas across frontend, backend, AI, and full-stack categories with filtering and difficulty ratings.
+          </p>
+          <div class="project-tech">
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="badge-tech-icon" alt="" /> HTML5</span>
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="badge-tech-icon" alt="" /> CSS3</span>
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="badge-tech-icon" alt="" /> Vanilla JavaScript</span>
+          </div>
+          <div class="project-links">
+            <a href="https://hamdan-a11y.github.io/random-project-idea-generator/" class="project-link btn-live" target="_blank" rel="noopener noreferrer">
+              Live Demo
+            </a>
+            <a href="https://github.com/Hamdan-a11y/random-project-idea-generator" class="project-link" target="_blank" rel="noopener noreferrer">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View on GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- PROJECT 7 -->
+        <div class="project-card card reveal reveal-delay-2">
+          <span class="project-tag">Frontend · Tool</span>
+          <h3>Shortcut Hub</h3>
+          <p>
+            Productivity tool aggregating keyboard shortcuts and cheat sheets for developer IDEs, terminals, and operating systems.
+          </p>
+          <div class="project-tech">
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="badge-tech-icon" alt="" /> HTML5</span>
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="badge-tech-icon" alt="" /> CSS3</span>
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="badge-tech-icon" alt="" /> JavaScript</span>
+          </div>
+          <div class="project-links">
+            <a href="https://hamdan-a11y.github.io/shortcut-hub/" class="project-link btn-live" target="_blank" rel="noopener noreferrer">
+              🌐 Live Demo
+            </a>
+            <a href="https://github.com/Hamdan-a11y/shortcut-hub" class="project-link" target="_blank" rel="noopener noreferrer">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View on GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- PROJECT 8 -->
+        <div class="project-card card reveal reveal-delay-1">
+          <span class="project-tag">Frontend · Tool</span>
+          <h3>JavaScript Calculator</h3>
+          <p>
+            Sleek, responsive web calculator supporting arithmetic operations, keyboard inputs, theme toggling, and history tracking built using modern JavaScript.
+          </p>
+          <div class="project-tech">
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="badge-tech-icon" alt="" /> HTML5</span>
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="badge-tech-icon" alt="" /> CSS3</span>
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="badge-tech-icon" alt="" /> JavaScript</span>
+          </div>
+          <div class="project-links">
+            <a href="https://hamdan-a11y.github.io/javascript-calculator/" class="project-link btn-live" target="_blank" rel="noopener noreferrer">
+              🌐 Live Demo
+            </a>
+            <a href="https://github.com/Hamdan-a11y/javascript-calculator" class="project-link" target="_blank" rel="noopener noreferrer">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View on GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- PROJECT 9 -->
+        <div class="project-card card reveal reveal-delay-2">
+          <span class="project-tag">Frontend · UI Gallery</span>
+          <h3>Premium Image Gallery</h3>
+          <p>
+            Responsive media showcase featuring full-screen lightbox previews, smooth filter transitions, and dynamic grid layouts.
+          </p>
+          <div class="project-tech">
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="badge-tech-icon" alt="" /> HTML5</span>
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="badge-tech-icon" alt="" /> CSS3</span>
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="badge-tech-icon" alt="" /> JavaScript</span>
+          </div>
+          <div class="project-links">
+            <a href="https://hamdan-a11y.github.io/premium-image-gallery/" class="project-link btn-live" target="_blank" rel="noopener noreferrer">
+              🌐 Live Demo
+            </a>
+            <a href="https://github.com/Hamdan-a11y/premium-image-gallery" class="project-link" target="_blank" rel="noopener noreferrer">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View on GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- PROJECT 10 -->
+        <div class="project-card card reveal reveal-delay-1">
+          <span class="project-tag">Frontend · Component</span>
+          <h3>Basic Loading Screen</h3>
+          <p>
+            Clean CSS animated loading screen design featuring keyframe spinners and pulsing indicators for modern web applications.
+          </p>
+          <div class="project-tech">
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="badge-tech-icon" alt="" /> HTML5</span>
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="badge-tech-icon" alt="" /> CSS3</span>
+          </div>
+          <div class="project-links">
+            <a href="https://hamdan-a11y.github.io/Basic-loading-screen-using-html-css/" class="project-link btn-live" target="_blank" rel="noopener noreferrer">
+              🌐 Live Demo
+            </a>
+            <a href="https://github.com/Hamdan-a11y/Basic-loading-screen-using-html-css" class="project-link" target="_blank" rel="noopener noreferrer">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View on GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- PROJECT 11 -->
+        <div class="project-card card reveal reveal-delay-2">
+          <span class="project-tag">Python · Reddit API</span>
+          <h3>Discord Meme Bot</h3>
+          <p>
+            Built a Discord bot that fetches and delivers random memes from Reddit subreddits on command.
+            Integrated the Reddit API via PRAW with async command handling and graceful error management.
+          </p>
+          <div class="project-tech">
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="badge-tech-icon" alt="" /> Python</span>
+            <span><img src="https://cdn.simpleicons.org/discord/5865F2" class="badge-tech-icon" alt="" /> Discord.py</span>
+            <span><img src="https://cdn.simpleicons.org/reddit/FF4500" class="badge-tech-icon" alt="" /> PRAW (Reddit API)</span>
+            <span><img src="https://cdn.simpleicons.org/json/000000" class="badge-tech-icon" alt="" /> JSON</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/Hamdan-a11y/discord-meme-bot" class="project-link" target="_blank" rel="noopener noreferrer">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View on GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- PROJECT 12 -->
+        <div class="project-card card reveal reveal-delay-1">
+          <span class="project-tag">Web Scraping · Python</span>
+          <h3>IMDB Web Scraper</h3>
+          <p>
+            Scraped and structured the top 50 IMDB movies (title, rating, genre, year) using BeautifulSoup.
+            Cleaned and exported the dataset to CSV with Pandas for further analysis.
+          </p>
+          <div class="project-tech">
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="badge-tech-icon" alt="" /> Python</span>
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="badge-tech-icon" alt="" /> BeautifulSoup</span>
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="badge-tech-icon" alt="" /> Requests</span>
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" class="badge-tech-icon" alt="" /> Pandas</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/Hamdan-a11y/web-scraping-top-50-imdb-movies" class="project-link" target="_blank" rel="noopener noreferrer">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View on GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- PROJECT 13 -->
+        <div class="project-card card reveal reveal-delay-2">
+          <span class="project-tag">Deep Learning · NLP</span>
+          <h3>Transformer Language Model</h3>
+          <p>
+            Built a Transformer from scratch for sequence-to-sequence translation using Multi-Head
+            Attention and Embedding layers. Implemented full encoder-decoder pipeline with tokenization,
+            positional encoding, and attention mechanisms.
+          </p>
+          <div class="project-tech">
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="badge-tech-icon" alt="" /> Python</span>
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" class="badge-tech-icon" alt="" /> TensorFlow</span>
+            <span><img src="https://cdn.simpleicons.org/keras/D00000" class="badge-tech-icon" alt="" /> Keras</span>
+            <span><img src="https://cdn.simpleicons.org/python/3776AB" class="badge-tech-icon" alt="" /> MultiHeadAttention</span>
+            <span><img src="https://cdn.simpleicons.org/python/3776AB" class="badge-tech-icon" alt="" /> Seq2Seq</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/Hamdan-a11y/ai-ml-models-" class="project-link" target="_blank" rel="noopener noreferrer">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View on GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- PROJECT 14 -->
+        <div class="project-card card reveal reveal-delay-1">
+          <span class="project-tag">Machine Learning · NLP</span>
+          <h3>Spam Email Classifier — Naive Bayes from Scratch</h3>
+          <p>
+            Written from scratch in pure Python with zero ML libraries — to understand the math behind
+            probabilistic classification. Includes a built-in demo dataset and interactive mode for
+            real-time email classification.
+          </p>
+          <div class="project-tech">
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="badge-tech-icon" alt="" /> Python</span>
+            <span><img src="https://cdn.simpleicons.org/scikitlearn/F7931E" class="badge-tech-icon" alt="" /> Naive Bayes</span>
+            <span><img src="https://cdn.simpleicons.org/python/3776AB" class="badge-tech-icon" alt="" /> NLP</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/Hamdan-a11y/ai-ml-models-" class="project-link" target="_blank" rel="noopener noreferrer">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View on GitHub
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       EXPERIENCE & EDUCATION (Timeline)
+       ═══════════════════════════════════════════════════════════ -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-heading reveal">
+        <h2>Experience &amp; Education</h2>
+      </div>
+
+      <div class="timeline">
+        <!-- Entry 1 -->
+        <div class="timeline-item reveal reveal-delay-1">
+          <div class="timeline-dot"></div>
+          <span class="timeline-date">2025 – 2026</span>
+          <div class="timeline-content card">
+            <h3>Final Year Project: Faculty Tasks Automation System</h3>
+            <p class="timeline-org">SZABIST Islamabad</p>
+            <p>Solo developer — built all 12 modules from documentation to deployment, including automated marks entry, attendance tracking, and CLO analysis.</p>
+          </div>
+        </div>
+
+        <!-- Entry 2 -->
+        <div class="timeline-item reveal reveal-delay-2">
+          <div class="timeline-dot"></div>
+          <span class="timeline-date">2022 – 2026</span>
+          <div class="timeline-content card">
+            <h3>BS Computer Science</h3>
+            <p class="timeline-org">SZABIST Islamabad (Completed)</p>
+            <p>CGPA: 3.11 / 4.00 — Coursework: Artificial Intelligence, Digital Image Processing, Intro to Data Science, Probability &amp; Statistics, Linear Algebra, Data Structures &amp; Algorithms, DBMS, OS, Computer Networks.</p>
+          </div>
+        </div>
+
+        <!-- Entry 3 -->
+        <div class="timeline-item reveal reveal-delay-3">
+          <div class="timeline-dot"></div>
+          <span class="timeline-date">Certified</span>
+          <div class="timeline-content card">
+            <h3>AI, Machine Learning &amp; Deep Learning</h3>
+            <p class="timeline-org">NAVTTC, Govt. of Pakistan</p>
+            <p>Govt. certified program covering Python, ML algorithms, Deep Learning, and Neural Networks from basics to advanced. Worked on data preprocessing, model training, and evaluation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CONTACT
+       ═══════════════════════════════════════════════════════════ -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-heading reveal">
+        <h2>Get In Touch</h2>
+      </div>
+
+      <p class="contact-intro reveal">
+        I'm actively seeking a junior web developer or backend developer role. Feel free to reach out for opportunities, collaborations, or project inquiries!
+      </p>
+
+      <div class="contact-grid">
+        <div class="contact-card card reveal reveal-delay-1">
+          <h4>Email</h4>
+          <a href="mailto:muhammadhamdan43@gmail.com">muhammadhamdan43@gmail.com</a>
+        </div>
+        <div class="contact-card card reveal reveal-delay-2">
+          <h4>Location</h4>
+          <p>Islamabad, Pakistan</p>
+        </div>
+        <div class="contact-card card reveal reveal-delay-3">
+          <h4>Phone</h4>
+          <p>+92 316-0458909</p>
+        </div>
+      </div>
+
+      <div class="contact-github reveal">
+        <a href="https://github.com/Hamdan-a11y" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          View GitHub Profile
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       GITHUB ACTIVITY
+       ═══════════════════════════════════════════════════════════ -->
+  <section id="github">
+    <div class="container">
+      <div class="section-heading reveal">
+        <h2>GitHub Activity</h2>
+        <p>A year of building, learning, and shipping — visualized.</p>
+      </div>
+
+      <!-- Stats Row -->
+      <div class="gh-stats-row reveal">
+        <div class="gh-stat-card card">
+          <div class="gh-stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          </div>
+          <div class="gh-stat-content">
+            <span class="gh-stat-label">Followers</span>
+            <span class="gh-stat-value" data-count="14" id="gh-count-followers">0</span>
+          </div>
+        </div>
+        <div class="gh-stat-card card">
+          <div class="gh-stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <div class="gh-stat-content">
+            <span class="gh-stat-label">Total Commits</span>
+            <span class="gh-stat-value" data-count="892" id="gh-count-commits">0</span>
+          </div>
+        </div>
+        <div class="gh-stat-card card">
+          <div class="gh-stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h7v7H3z"/><path d="M14 3h7v7h-7z"/><path d="M14 14h7v7h-7z"/><path d="M3 14h7v7H3z"/></svg>
+          </div>
+          <div class="gh-stat-content">
+            <span class="gh-stat-label">Repositories</span>
+            <span class="gh-stat-value" data-count="33" id="gh-count-repos">0</span>
+          </div>
+        </div>
+        <div class="gh-stat-card card">
+          <div class="gh-stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <div class="gh-stat-content">
+            <span class="gh-stat-label">Stars Earned</span>
+            <span class="gh-stat-value" data-count="47" id="gh-count-stars">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Heatmap -->
+      <div class="gh-heatmap-wrapper card reveal">
+        <div class="gh-heatmap-header">
+          <span class="gh-heatmap-title">Contribution Activity · Last 12 months</span>
+          <a href="https://github.com/Hamdan-a11y" target="_blank" rel="noopener noreferrer" class="gh-profile-link">
+            View Profile
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+        <div class="gh-heatmap-scroll">
+          <div class="gh-month-labels" id="gh-month-labels"></div>
+          <div class="gh-grid-area">
+            <div class="gh-day-labels">
+              <span>Mon</span>
+              <span>Wed</span>
+              <span>Fri</span>
+            </div>
+            <div class="gh-grid" id="gh-grid"></div>
+          </div>
+        </div>
+        <div class="gh-heatmap-footer">
+          <span class="gh-legend-label">Less</span>
+          <div class="gh-legend">
+            <div class="gh-legend-cell" data-level="0"></div>
+            <div class="gh-legend-cell" data-level="1"></div>
+            <div class="gh-legend-cell" data-level="2"></div>
+            <div class="gh-legend-cell" data-level="3"></div>
+            <div class="gh-legend-cell" data-level="4"></div>
+          </div>
+          <span class="gh-legend-label">More</span>
+        </div>
+        <!-- Tooltip -->
+        <div class="gh-tooltip" id="gh-tooltip"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-copy">&copy; 2026 Muhammad Hamdan. Built with HTML, CSS &amp; JS.</p>
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#github">GitHub</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Palette Studio Popover -->
+  <div id="palette-studio" class="palette-studio" aria-hidden="true">
+    <div class="palette-studio-header">
+      <h3>🎨 Palette Studio</h3>
+      <button id="palette-close" aria-label="Close Palette Studio">&times;</button>
+    </div>
+    <div class="palette-studio-body">
+      <p class="palette-section-title">Select Preset Theme</p>
+      <div class="palette-presets">
+        <button class="palette-preset-btn active" data-preset="matrix" title="Matrix Cyber Hack" style="--preset-color: #00FF9D;"></button>
+        <button class="palette-preset-btn" data-preset="cyberpunk" title="Cyberpunk Neon" style="--preset-color: #00F0FF;"></button>
+        <button class="palette-preset-btn" data-preset="synthwave" title="Synthwave Purple" style="--preset-color: #8B5CF6;"></button>
+        <button class="palette-preset-btn" data-preset="solarized" title="Solarized Amber" style="--preset-color: #F59E0B;"></button>
+        <button class="palette-preset-btn" data-preset="nordic" title="Nordic Emerald" style="--preset-color: #10B981;"></button>
+        <button class="palette-preset-btn" data-preset="platinum" title="Platinum Slate (Light Theme)" style="--preset-color: #0F172A;"></button>
+      </div>
+
+      <div class="palette-divider"></div>
+
+      <p class="palette-section-title">Or Dial Accent Hue</p>
+      <div class="palette-slider-container">
+        <input type="range" id="palette-hue-slider" min="0" max="360" value="150" class="palette-slider" />
+        <div class="palette-slider-indicators">
+          <span>0°</span>
+          <span>120°</span>
+          <span>240°</span>
+          <span>360°</span>
+        </div>
+      </div>
+
+      <div class="palette-actions">
+        <button id="palette-reset" class="palette-action-btn">Reset to Default</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
 
